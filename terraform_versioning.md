@@ -1,10 +1,16 @@
 # Terraform Versioning
 
+This settles the terraform and providers version management.
+It does not discuss the terraform module version management.
+
 ## Environnement layer versioning
 
+### Terraform < 1.0
+
 At the root of a layer (ie, the directory where "terraform apply" is run),
-best practice is to specify an exact version of Terraform to use. Use the
-"= 1.2.3" constraint to do this.
+best practice is to specify an exact version of Terraform to use. This is due
+to terraform state incompatibility between 0.X versions. Use the
+`= 1.2.3` constraint to do this.
 
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
 
@@ -14,15 +20,39 @@ terraform {
 }
 ```
 
+### Terraform > 1.0 and < 2.0
+
+In terraform `1.x` and above (not terraform `2.x`), you can allow more flexibility with regards to Terraform's
+minor and/or patch versions. Use the `~> 1.0.0` constraint to do this.
+
+> For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
+
+```yaml
+terraform {
+  required_version = "~> 1.0.0"
+}
+```
+
+## Bump terraform version
+
+TODO: List steps like
+
+1. Review Changelog
+2. Make modifications
+3. If possible, `terraform plan`
+4. Change terraform version
+5. tfswitch
+6. `terraform plan`
+7. `terraform apply`
+8. ...
+
 ## Module layer versioning
 
 ### Terraform CLI version
 
-### Required providers version
-
 In a module, you can allow more flexibility with regards to Terraform's
-minor and/or patch versions. For example, the "~> 1.0" constraint will allow
-all 1.x.x versions of Terraform, while the "~> 1.0.0" constraint will allow
+minor and/or patch versions. For example, the `~> 1.0` constraint will allow
+all 1.x.x versions of Terraform, while the `~> 1.0.0` constraint will allow
 all 1.0.x versions.
 
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
@@ -32,6 +62,8 @@ terraform {
   required_version = "~> 1.0"
 }
 ```
+
+### Required providers version
 
 You can indicate that the module requires that certain providers are configured by the caller.
 Again; use the "~> 1.0" constraint to allow all minor and/or patch versions.
@@ -56,3 +88,7 @@ terraform {
   }
 }
 ```
+
+## Bump version
+
+TODO
