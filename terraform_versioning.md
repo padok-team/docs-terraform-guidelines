@@ -10,13 +10,13 @@ It does not discuss the terraform module version management.
 At the root of a layer (ie, the directory where "terraform apply" is run),
 best practice is to specify an exact version of Terraform to use. This is due
 to terraform state incompatibility between 0.X versions. Use the
-`= 1.2.3` constraint to do this.
+`= 0.2.3` constraint to do this.
 
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
 
 ```yaml
 terraform {
-  required_version = "= 1.1.8"
+  required_version = "= 0.14.0"
 }
 ```
 
