@@ -55,6 +55,8 @@ minor and/or patch versions. For example, the `~> 1.0` constraint will allow
 all 1.x.x versions of Terraform, while the `~> 1.0.0` constraint will allow
 all 1.0.x versions.
 
+**Modules that use features added in a specific minor version (eg: moved blocks added in 1.1) should require that version as a minimum.**
+
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
 
 ```yaml
