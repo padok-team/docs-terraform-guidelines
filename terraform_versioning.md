@@ -16,8 +16,8 @@ to terraform state incompatibility between 0.X versions. Use the
 
 ```yaml
 terraform {
-  required_version = "= 0.14.0"
-}
+  required_version = "0.14.0"
+  }
 ```
 
 ### Terraform > 1.0 and < 2.0
@@ -29,9 +29,13 @@ minor and/or patch versions. Use the `~> 1.0.0` constraint to do this.
 
 ```yaml
 terraform {
-  required_version = "~> 1.0.0"
+  required_version = "1.0.0"
 }
 ```
+
+### Required providers version for layers
+
+If the layer uses providers directly, as opposed to only through modules, then you should also specify version contraints for those providers in the layer's configuration. The same recommendations apply regarding this versioning as for modules. See below for specifics.
 
 ## Bump terraform version
 
@@ -65,7 +69,7 @@ terraform {
 }
 ```
 
-### Required providers version
+### Required providers version for modules
 
 You can indicate that the module requires that certain providers are configured by the caller.
 Again; use the "~> 1.0" constraint to allow all minor and/or patch versions.
