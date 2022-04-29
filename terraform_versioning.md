@@ -22,8 +22,8 @@ terraform {
 
 ### Terraform > 1.0 and < 2.0
 
-In terraform `1.x` and above (not terraform `2.x`), you can allow more flexibility with regards to Terraform's
-minor and/or patch versions. Use the `~> 1.0.0` constraint to do this.
+In terraform `1.x` and above, even though terraform guarantees no breaking changes on its state, you should stick with specifying an exact version of Terraform to use.
+Use the `= 1.0.0` constraint to do this.
 
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
 
