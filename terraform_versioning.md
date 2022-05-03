@@ -47,6 +47,16 @@ configuration.
 In order to make the behaviour of layers completely deterministic, the version
 should be fixed to a specific version. Use the `= 1.0.0` constraint to do this.
 
+### Terraform lock files in layers
+
+Lock files in Terraform are generated upon running `terraform init`. These
+files, named `.terraform.lock.hcl`, must be committed into the repo. They allow
+for deterministic behaviour in dependency management across devices running our
+code.
+
+These files only appear in directories in which you run `terraform init`,
+therefore there are none in modules.
+
 ## Bump terraform version
 
 TODO: List steps like
