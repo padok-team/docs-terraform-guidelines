@@ -3,6 +3,10 @@
 This settles the terraform and providers version management.
 It does not discuss the terraform module version management.
 
+## TLDR;
+> *Be flexible about versions in modules; be unambiguous about versions in
+> layers.*
+
 ## Environnement layer versioning
 
 ### Terraform < 1.0
@@ -22,8 +26,9 @@ terraform {
 
 ### Terraform > 1.0 and < 2.0
 
-In terraform `1.x` and above, even though terraform guarantees no breaking changes on its state, you should stick with specifying an exact version of Terraform to use.
-Use the `= 1.0.0` constraint to do this.
+In terraform `1.x` and above, even though terraform guarantees no breaking
+changes on its state, you should stick with specifying an exact version of
+Terraform to use. Use the `= 1.0.0` constraint to do this.
 
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
 
@@ -35,7 +40,12 @@ terraform {
 
 ### Required providers version for layers
 
-If the layer uses providers directly, as opposed to only through modules, then you should also specify version contraints for those providers in the layer's configuration. The same recommendations apply regarding this versioning as for modules. See below for specifics.
+If the layer uses providers directly, as opposed to only through modules, then
+you should also specify version contraints for those providers in the layer's
+configuration. 
+
+In order to make the behaviour of layers completely deterministic, the version
+should be fixed to a specific version. Use the `= 1.0.0` constraint to do this.
 
 ## Bump terraform version
 
