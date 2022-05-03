@@ -2,7 +2,7 @@
 
 ## `use_snake_case_0nly`
 
-All resource or variable names in Terraform code are written in `snake_case`. 
+All resource or variable names in Terraform code must be written in `snake_case`. 
 This means allowed characters are lowercase alphanumeric characters, with `_`
 separators when needed.
 
@@ -64,7 +64,7 @@ variable "tags" {
 ```
 
 Do not reinvent the wheel when naming variables or writing descriptions. If a
-variable is consumed by a resource or module directly, maybe reuse the variable
+variable is consumed by a resource or module directly, reuse the variable
 name from the "**Argument Reference**" section in the resource's (or module's)
 documentation.
 
