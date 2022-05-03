@@ -10,7 +10,6 @@ Why ?
 - it is the standard in the terraform ecosystem
 - not following the standard can cause confusion in the team and slow down 
   onboarding
-- these guidelines are what is recommended by the [Terraform Best Practices](https://www.terraform-best-practices.com/naming) site (*do not hesitate to check this website out!*)
 
 > Note : Beware that actual cloud resources often have restrictions in allowed
 > names. Some resources, for example, can't contain dashes, some must be
