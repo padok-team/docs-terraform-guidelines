@@ -15,7 +15,7 @@ We do not recommand to have a module tree that is too deep.
 * **Debugging**
   * It is hard to understand what is going on in the code -> debugging is hard
 * **Maintainability**
-  * Upgrade a root, child or grandchild modules may have an impact on the whole module tree
+  * Upgrade a root, child or grandchild modules may have an impact on the whole module tree _(providers / terraform versions for instance)_
 
 ### Recommandation
 
