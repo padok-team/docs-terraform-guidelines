@@ -30,7 +30,7 @@ Ok :+1:
 │   ├── child_module_2 # <- Level 1
 ```
 
-Not ok Ok :-1:
+Not ok :-1:
 
 ```yaml
 ├── root_module # <- Level 0
