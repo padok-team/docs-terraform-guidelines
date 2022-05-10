@@ -19,23 +19,20 @@ Why ?
 
 ## Resource and/or data source naming
 
-Follow the DRY principle (Do not Repeat Yourself) when naming Terraform
-resources. Examples : 
+Avoid stuttering when naming Terraform resources. Examples : 
 
 ```terraform
-resource "aws_route_table" "public" {}                 # <- 🟢 no repetitions 
-resource "aws_route_table" "public_route_table" {}     # <- 🔴 repetitions
-resource "aws_route_table" "public_aws_route_table" {} # <- 🔴 many repetitions
-```
+resource "aws_route_table" "public" {}                 # <- 🟢 no stuttering 
+resource "aws_route_table" "public_route_table" {}     # <- 🔴 stuttering
+resource "aws_route_table" "public_aws_route_table" {} # <- 🔴 maximum stuttering
 
-In the context of a module, a resource whose name is self-explanatory should
-directly be named `this`. Example : 
+Name a resource `this` if there is no more descriptive and general name available, or if the resource is part of a module that creates a single resource of this type. For example, in a `terraform-google-bucket` module : 
+
 ```terraform
 resource "google_storage_bucket" "this" {
-  name     = var.name
-  ...
+  name = var.name
+  // ...
 }
-```
 
 Resource and module instance names should always be singular.
 
@@ -88,7 +85,7 @@ output "this" {
 ```
 
 Example of a module that instanciates a Function App, a Storage Account and an
-App Insights.
+App Insights. The module is called `azurerm-function-app`.
 
 ```terraform
 output "this" {
