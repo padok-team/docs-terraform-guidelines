@@ -94,9 +94,38 @@ Why ?
   ```
 
 Do not reinvent the wheel when naming variables or writing descriptions. If a
-variable is consumed by a resource or module directly, reuse the variable
-name from the "**Argument Reference**" section in the resource's (or module's)
-documentation.
+variable is consumed by a resource or module directly and you don't need any sort
+of abstraction, reuse the variable name from the "**Argument Reference**" section
+in the resource's (or module's) documentation.
+
+```terraform
+module "bucket" {
+  source   = "github.com/padok-team/terraform-google-bucket"
+
+  name = "frontend"
+  storage_class = local.storage_class
+
+  tags = local.tags
+}
+```
+
+If your module is abstracting resource variables in any way, you should find a nam that best suits
+your parameter.
+
+```terraform
+module "private_bucket" {
+  source   = "github.com/padok-team/terraform-google-bucket"
+
+  name = local.name
+  private = true
+}
+module "public_bucket" {
+  source   = "github.com/padok-team/terraform-google-bucket"
+
+  name = local.name
+  private = false
+}
+```
 
 ## Module outputs
 
