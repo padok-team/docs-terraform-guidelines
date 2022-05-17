@@ -13,7 +13,7 @@ The bigger is an infrastructure, the more optimized would be the underlaying cod
 
 Use array and a count in Terraform is a solution to avoid repetition when creating a lot of resources.
 
-```json
+```yaml
 variable "public_dns" {
     type = list({
         name    = string
@@ -55,7 +55,7 @@ Accessing maps values are done by the use of a `key`, not an `index`. The differ
 
 Also, the `map` use the `for_each` function, which allows to use the `each` iterator. The code is lighter than before when accessing values.
 
-```json
+```yaml
 variable "public_dns" {
     type = map({
         records = list(string)
