@@ -17,81 +17,84 @@ Why ?
 > camelCased. The conventions in this document refer to Terraform names
 > themselves.
 
-
 ## Resource and/or data source naming
 
-Avoid stuttering when naming Terraform resources. Examples :
+- Avoid stuttering when naming Terraform resources.
 
-```terraform
-resource "aws_route_table" "public" {}                 # <- 🟢 no stuttering
-resource "aws_route_table" "public_route_table" {}     # <- 🔴 stuttering
-resource "aws_route_table" "public_aws_route_table" {} # <- 🔴 maximum stuttering
+  ```terraform
+  resource "aws_route_table" "public" {}                 # <- 🟢 no stuttering
+  resource "aws_route_table" "public_route_table" {}     # <- 🔴 stuttering
+  resource "aws_route_table" "public_aws_route_table" {} # <- 🔴 maximum stuttering
+  ```
 
-Name a resource `this` if there is no more descriptive and general name available, or if the resource is part of a module that creates a single resource of this type. For example, in a `terraform-google-bucket` module :
+- Name a resource `this` if there is no more descriptive and general name available, or if the resource is part of a module that creates a single resource of this type. For example, in a `terraform-google-bucket` module :
 
-```terraform
-resource "google_storage_bucket" "this" {
-  name = var.name
-  // ...
-}
+  ```terraform
+  resource "google_storage_bucket" "this" {
+    name = var.name
+    // ...
+  }
 
-Resource and module instance names should be singular if they represent only one instance and should be plural in the case you loop over them with `for_each` or `for`.
+- Resource and module instance names should be singular if they represent only one instance and should be plural in the case you loop over them with `for_each` or `for`.
 
-```terraform
-module "bucket" {
-  source   = "github.com/padok-team/terraform-google-bucket"
+  ```terraform
+  module "bucket" {
+    source   = "github.com/padok-team/terraform-google-bucket"
 
-  name = "frontend"
-}
-```
+    name = "frontend"
+  }
+  ```
 
-```terraform
-module "buckets" {
-  source   = "github.com/padok-team/terraform-google-bucket"
-  for_each = toset([0, 1, 2])
+  ```terraform
+  module "buckets" {
+    source   = "github.com/padok-team/terraform-google-bucket"
+    for_each = toset([0, 1, 2])
 
-  name = "bucket-${each.key}"
-}
-```
+    name = "bucket-${each.key}"
+  }
+  ```
 
 ## Variables
 
-Variable names for **lists** must be plural.
+- Variable names for **lists** must be plural.
 
-Variable names for **maps** should reflect the usage of the map.
-The relationship between the key and values should be obvious based on the name. For example:
+- Variable names for **maps** should reflect the usage of the map. The relationship between the key and values should be obvious based on the name.
 
-```terraform
-locals {
-  role_by_contributor = {
-    "arthurb@padok.fr"   = "Viewer"
-    "antoinec@padok.fr"  = "Editor"
-    "benjamins@padok.fr" = "Admin"
+  ```terraform
+  locals {
+    role_by_contributor = {
+      "arthurb@padok.fr"   = "Viewer"
+      "antoinec@padok.fr"  = "Editor"
+      "benjamins@padok.fr" = "Admin"
+    }
   }
-}
-```
+  ```
 
-In the example above, `role_by_contributor` is much clearer than `contributor_roles`. It also breaks any ambiguity around the number of roles per contributor. In the example above the name of variable indicates that each contributor has a single role. If contributors had multiple roles each, the variable name should be `roles_by_contributor`. `contributor_roles` is ambiguous about the plurality of roles per contributor.
+  In the example above, `role_by_contributor` is much clearer than `contributor_roles`.
+  It also breaks any ambiguity around the number of roles per contributor.
+  In the example above the name of variable indicates that each contributor has a single role.
+  If contributors had multiple roles each, the variable name should be `roles_by_contributor`.
+  `contributor_roles` is ambiguous about the plurality of roles per contributor.
 
-Avoid repeating yourself within a variable's name. Example :
+- Avoid repeating yourself within a variable's name.
 
-```terraform
-variable "s3_storage_bucket_name" # <- 🔴 too precise
-variable "bucket"                 # <- 🔴 not precise enough
-variable "bucket_name"            # <- 🟢 seems like a good compromise
-```
+  ```terraform
+  variable "s3_storage_bucket_name" # <- 🔴 too precise
+  variable "bucket"                 # <- 🔴 not precise enough
+  variable "bucket_name"            # <- 🟢 seems like a good compromise
+  ```
 
-Always provide a variable's description, even if it seems obvious to you.
+- Always provide a variable's description, even if it seems obvious to you.
 
-```terraform
-variable "tags" {
-  description = "A mapping of tags to assign to the resource."
-  type        = map(string)
-  default = {
-    terraform = "true",
+  ```terraform
+  variable "tags" {
+    description = "A mapping of tags to assign to the resource."
+    type        = map(string)
+    default = {
+      terraform = "true",
+    }
   }
-}
-```
+  ```
 
 Do not reinvent the wheel when naming variables or writing descriptions. If a
 variable is consumed by a resource or module directly, reuse the variable
@@ -105,35 +108,32 @@ your codebase, and for them to be understandable outside of their immediate
 context. From a user's perspective, it should be trivial what type each
 attribute has.
 
-If the output is a **list** or a **map**, its name must be plural.
+- If the output is a **list** or a **map**, its name must be plural.
 
-Always provide an output's description, even if it seems obvious to you.
+- Always provide an output's description, even if it seems obvious to you.
 
-Example :
+  ```terraform
+  output "this" {
+    description = "The AKS resource."
+    value       = data.azurerm_kubernetes_cluster.this
+  }
+  ```
 
-```terraform
-output "this" {
-  description = "The AKS resource."
-  value       = data.azurerm_kubernetes_cluster.this
-}
-```
+- Example of a module that instanciates a Function App, a Storage Account and an App Insights. The module is called `azurerm-function-app`.
 
-Example of a module that instanciates a Function App, a Storage Account and an
-App Insights. The module is called `azurerm-function-app`.
+  ```terraform
+  output "this" {
+    description = "The Function App resource."
+    value       = module.azurerm_function_app.this
+  }
 
-```terraform
-output "this" {
-  description = "The Function App resource."
-  value       = module.azurerm_function_app.this
-}
+  output "app_insights" {
+    description = "The Application Insights resource."
+    value       = module.azurerm_application_insights.this
+  }
 
-output "app_insights" {
-  description = "The Application Insights resource."
-  value       = module.azurerm_application_insights.this
-}
-
-output "storage_account" {
-  description = "The Storage Account resource."
-  value       = module.azurerm_storage_account.this
-}
-```
+  output "storage_account" {
+    description = "The Storage Account resource."
+    value       = module.azurerm_storage_account.this
+  }
+  ```
