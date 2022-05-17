@@ -2,13 +2,13 @@
 
 ## `use_snake_case_0nly`
 
-All resource or variable names in Terraform code must be written in `snake_case`. 
+All resource or variable names in Terraform code must be written in `snake_case`.
 This means allowed characters are lowercase alphanumeric characters, with `_`
 separators when needed.
 
 Why ?
 - it is the standard in the terraform ecosystem
-- not following the standard can cause confusion in the team and slow down 
+- not following the standard can cause confusion in the team and slow down
   onboarding
 
 > Note : Beware that actual cloud resources often have restrictions in allowed
@@ -19,14 +19,14 @@ Why ?
 
 ## Resource and/or data source naming
 
-Avoid stuttering when naming Terraform resources. Examples : 
+Avoid stuttering when naming Terraform resources. Examples :
 
 ```terraform
-resource "aws_route_table" "public" {}                 # <- 🟢 no stuttering 
+resource "aws_route_table" "public" {}                 # <- 🟢 no stuttering
 resource "aws_route_table" "public_route_table" {}     # <- 🔴 stuttering
 resource "aws_route_table" "public_aws_route_table" {} # <- 🔴 maximum stuttering
 
-Name a resource `this` if there is no more descriptive and general name available, or if the resource is part of a module that creates a single resource of this type. For example, in a `terraform-google-bucket` module : 
+Name a resource `this` if there is no more descriptive and general name available, or if the resource is part of a module that creates a single resource of this type. For example, in a `terraform-google-bucket` module :
 
 ```terraform
 resource "google_storage_bucket" "this" {
@@ -34,7 +34,24 @@ resource "google_storage_bucket" "this" {
   // ...
 }
 
-Resource and module instance names should always be singular.
+Resource and module instance names should be singular if they represent only one instance and should be plural in the case you loop over them with `for_each` or `for`.
+
+```terraform
+module "bucket" {
+  source   = "github.com/padok-team/terraform-google-bucket"
+
+  name = "frontend"
+}
+```
+
+```terraform
+module "buckets" {
+  source   = "github.com/padok-team/terraform-google-bucket"
+  for_each = toset([0, 1, 2])
+
+  name = "bucket-${each.key}"
+}
+```
 
 ## Variables
 
