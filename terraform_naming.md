@@ -7,6 +7,7 @@ This means allowed characters are lowercase alphanumeric characters, with `_`
 separators when needed.
 
 Why ?
+
 - it is the standard in the terraform ecosystem
 - not following the standard can cause confusion in the team and slow down
   onboarding
@@ -55,9 +56,25 @@ module "buckets" {
 
 ## Variables
 
-Variable names for **lists** or **maps** must be plural.
+Variable names for **lists** must be plural.
+
+Variable names for **maps** should reflect the usage of the map.
+The relationship between the key and values should be obvious based on the name. For example:
+
+```terraform
+locals {
+  role_by_contributor = {
+    "arthurb@padok.fr"   = "Viewer"
+    "antoinec@padok.fr"  = "Editor"
+    "benjamins@padok.fr" = "Admin"
+  }
+}
+```
+
+In the example above, `role_by_contributor` is much clearer than `contributor_roles`. It also breaks any ambiguity around the number of roles per contributor. In the example above the name of variable indicates that each contributor has a single role. If contributors had multiple roles each, the variable name should be `roles_by_contributor`. `contributor_roles` is ambiguous about the plurality of roles per contributor.
 
 Avoid repeating yourself within a variable's name. Example :
+
 ```terraform
 variable "s3_storage_bucket_name" # <- 🔴 too precise
 variable "bucket"                 # <- 🔴 not precise enough
