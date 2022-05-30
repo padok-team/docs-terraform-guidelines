@@ -134,7 +134,9 @@ your codebase, and for them to be understandable outside of their immediate
 context. From a user's perspective, it should be trivial what type each
 attribute has.
 
-- If the output is a **list** or a **map**, its name must be plural.
+- If the output is a **list** its name must be plural.
+
+- If the output is a **map** its name must obviously relates on key / value pairs.
 
 - Always provide an output's description, even if it seems obvious to you.
 
@@ -150,16 +152,16 @@ attribute has.
   ```terraform
   output "this" {
     description = "The Function App resource."
-    value       = module.azurerm_function_app.this
+    value       = module.function_app.this
   }
 
   output "app_insights" {
     description = "The Application Insights resource."
-    value       = module.azurerm_application_insights.this
+    value       = module.application_insights.this
   }
 
   output "storage_account" {
     description = "The Storage Account resource."
-    value       = module.azurerm_storage_account.this
+    value       = module.storage_account.this
   }
   ```
