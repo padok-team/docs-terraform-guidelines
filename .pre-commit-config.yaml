@@ -1,12 +1,5 @@
 default_stages: [commit]
 repos:
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v2.27.1
-    hooks:
-      - id: commitizen
-        stages:
-          - commit-msg
-
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.71.0
     hooks:
