@@ -17,3 +17,4 @@ You'll find bellow standards to follow when working with Terraform.
 Red flag is something that you must pay attention about. This is an advice or recommendation not a requirement.
 
 - [Child modules depth limit](child_modules_depth_limit.md)
+- [Don'ts](donts.md)
