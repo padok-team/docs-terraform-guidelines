@@ -96,3 +96,12 @@ In a small infrastructure it may seem a good idea but it's not since:
 3. if provider API changes your code will fail
 
 Do not do that.
+
+## Data in terraform modules
+
+Using data in terraform module is not recomanded because it can create circular dependencies between layers and force you to do target apply.
+
+![Data Circular dependency](./assets/img/data_circular_dependency.png)
+
+
+Prefer to set variables in your module, then call your data where your module is applied.
