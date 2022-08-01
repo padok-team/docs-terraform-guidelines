@@ -8,13 +8,16 @@ Guidelines to work with Terraform
 
 You'll find bellow standards to follow when working with Terraform.
 
-- [Terraform versioning](terraform_versioning.md)
-- [Terraform naming](terraform_naming.md)
-- [Optional attributes (experimental feature)](optional-attributes.md)
+- [Patterns](patterns.md)
+- [Versioning](terraform_versioning.md)
+- [Naming](terraform_naming.md)
+- [Pre-commits](pre-commits.md)
+- [Distant values references](refering_to_resources_from_other_layers.md)
 
 ## 🚩 Red flags
 
 Red flag is something that you must pay attention about. This is an advice or recommendation not a requirement.
 
-- [Child modules depth limit](child_modules_depth_limit.md)
 - [Don'ts](donts.md)
+- [Optional attributes (experimental feature)](optional-attributes.md)
+- [Child modules depth limit](child_modules_depth_limit.md)
