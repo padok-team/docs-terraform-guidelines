@@ -1,0 +1,160 @@
+# Don'ts / Red Flags
+
+## Workspaces
+
+It's the usage of `terraform workspace` commands.
+
+### Drawbacks
+
+- You cannot know the number of workspaces (or environments) just by reading the code.
+- Brings confusion in wich workspace the `terraform apply` command is performed, and so, can induce mistaking prod and non-prod environments.
+- Your adding options to your command line.
+
+### Solutions
+
+A solution can be to have some code duplication for each environment.
+
+## One-liners
+
+It consists in wrapping functions in functions in order to parse inputs.
+
+Example
+
+```hcl
+locals {
+   read_replica_private_ip = var.enable_ha ? lookup(zipmap([for addr in module.postgres.replicas_instance_first_ip_addresses.0 : values(addr).2],
+   [for addr in module.postgres.replicas_instance_first_ip_addresses.0 : values(addr).0]), "PRIVATE", null) : ""
+   read_replica_public_ip = var.enable_ha ? lookup(zipmap([for addr in module.postgres.replicas_instance_first_ip_addresses.0 : values(addr).2],
+   [for addr in module.postgres.replicas_instance_first_ip_addresses.0 : values(addr).0]), "PRIMARY", null) : ""
+ }
+```
+
+### Drawbacks
+
+It is very tempting to write one-liners that perfectly parses maps or lists to other wanted structures.
+But, wraping functions in functions brings complexity that will be painfull to understand while maintaining code. It quickly becomes technical debt.
+
+### Solutions
+
+A solution can be to same intermediate values of the parsed input, so that we split the complexity.
+Another one would be to rely on outputs from subsequent modules or resources.
+
+## Shell scripts in IaC codebase
+
+Shell scripts or other files within layers or modules aka folders with `.tf` files are just trash.
+Please store them in another dedicated folder or, even better, another repo.
+
+### Drawbacks
+
+- You may rely on scripts to apply and forget about how init and apply are done.
+- They'll be duplicated when you duplicate the folder with copy-paste, creating more junk.
+
+## Provisionning/Provisionners
+
+This is about drawing the line between **Providers** and **Provisionners**.
+
+Providers like terraform are used for (but not limited to):
+
+- create infrastructure parts
+- define network rules
+- handle IAM
+
+Provisionners like Ansible are used for (but not limited to):
+
+- deploy applications
+- change configurations
+
+So, in terrafom, don't use the following providers: Kubernetes; helm.
+
+### Drawbacks
+
+- Loose idempotence.
+
+## TFvars
+
+We prefer to use locals that do not require variable declarations to be used.
+
+So instead of this
+
+```hcl
+# dev.tfvars
+env = dev
+project = my_project
+```
+
+```hcl
+# main.tf
+variable "env" {}
+variable "project" {}
+
+resource "null" "this" {
+  project = var.project
+  env = var.env
+}
+```
+
+We have this
+
+```hcl
+# main.tf
+locals {
+  env = dev
+  project = my_project
+}
+
+resource "null" "this" {
+  project = var.project
+  env = var.env
+}
+```
+
+## Monolayer repos
+
+These are projects that look like this (every terraform files at the root of the repository).
+
+```plaintext
+.
+├── README.md
+├── backend.tf
+├── network.tf
+├── iam.tf
+├── app1_rds.tf
+├── app1_S3.tf
+└── provider.tf
+```
+
+### Drawbacks
+
+- Collaboration is deeply impacted since we have a mono state file.
+- `terraform plan` will take longer and longer each time we add a resource.
+- The [blast radius](https://docs.microsoft.com/en-us/azure/architecture/framework/resiliency/chaos-engineering#blast-radius) is important since all resources are close to each other.
+
+## Multi-layer repos
+
+This are projects that look like this (we store files in a tree arborescence with a depth of 1).
+
+```plaintext
+.
+├── README.md
+└── cloudrun
+    ├── README.md
+    ├── backend.tf
+    ├── main.tf
+    ├── provider.tf
+    ├── tfvars
+    │   ├── integration.tfvars
+    │   ├── production.tfvars
+    │   ├── staging.tfvars
+    │   └── testing.tfvars
+    └── variables.tf
+```
+
+### Advantages
+
+This type of repo brings flexibity alongside collaboration improvments.
+
+### Drawbacks
+
+- Too much layers can cause a higher maintainability cost.
+- We cannot easily use outputs of one layer in another.
+- Some non-selectives CI may run `terraform plan` over all layers.
