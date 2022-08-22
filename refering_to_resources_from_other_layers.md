@@ -18,13 +18,11 @@ In terraform, most resources have a [data source](https://www.terraform.io/langu
 ```bash=
 .
 ├── application
-│   ├── main.tf
-│   ├── provider.tf
-│   └── versions.tf
+│   ├── app.tf
+│   └── _settings.tf
 └── core
-    ├── main.tf
-    ├── provider.tf
-    └── versions.tf
+    ├── core.tf
+    └── _settings.tf
 ```
 
 **core/main.tf**
@@ -96,6 +94,47 @@ In a small infrastructure it may seem a good idea but it's not since:
 3. if provider API changes your code will fail
 
 Do not do that.
+
+## Architecture pattern
+
+When your layer refers to multiple data called for your different modules, you may want to call those data in dedicated files. 
+In that case, two patterns stand out for your code architecture:
+- using a `data.tf` file
+- following the [WYSIWYG pattern](./wysiwg_patterns.md)
+
+None of these two pattern is better than the other, but you should choose the one that is more adapted to your need.
+
+### Using a `data.tf` file
+
+A data is like a variable: it is a necessary input to use your module or create your resource. Therefore, all data from a layer should be gather in a single `data.tf` file (as it is for your `variables.tf`).
+
+This way would have the following advantages:
+
+- The code of the implementation of your module/resource is simpler, without a `data` block aside to pollute and affect the readability
+- If you need a data that might already be used for another resource, you only have to look in the one `data.tf` file to check if it is already there
+
+Moreover, this does not affect the comprehension of your code, as if your data is well named, you understand easily what it represents and therefore do not need to dive in the `data` block to understand what it is.
+
+```bash=
+.
+├── core.tf
+├── data.tf
+└── _settings.tf
+```
+
+### Following the WYSIWYG pattern
+
+As an antipattern of the solution above, following our wysiwyg convention involves creating files refering the purpose of your data. 
+
+In that way, you will know where to search your existing data simply by its purpose and not by its code origin. The data is considered as a part of your infrastructure code and not as an input.
+
+```bash=
+.
+├── core.tf
+├── rg.tf
+├── virtual_network.tf
+└── _settings.tf
+```
 
 ## Data in terraform modules
 
