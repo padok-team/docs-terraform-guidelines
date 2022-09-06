@@ -2,7 +2,38 @@
 
 Guidelines to work with Terraform
 
-💡 This documentation is provided by the IaC Guild. Check the [notion page](https://www.notion.so/m33/Infrastructure-as-Code-and-Configuration-Management-93a9e831e3d94125a6b92911686a07be) for more information.
+## 🎯 Our purpose
+
+This documentation is provided by the Padok IaC Guild. Its purpose is to present some guidelines and best practices about terraform development. 
+
+You do not have to see these guidelines as an absolute truth but more as a proposition to answer frequently asked questions and avoid issues you will often face in your projects.
+
+Our goal is to guide you in this serie of topics:
+
+**1. Layer/code organisation**
+- Your layer corresponds to a unique terraform state
+- Your code design reflects your business need
+- Only one team contributes on a layer (you have a clear vision of contribution & ownership)
+- Your state refresh time is acceptable for a contribution purpose
+
+**2. Communication between your layers**
+- Your can rebuild your infrastructure without the `-target` flag
+- You do not have any cyclical dependencies between resources
+- You use data blocks only in layers
+
+**3. Use of modules**
+- Your module's dependencies are provided by the caller 
+- Your module abtracts code complexity
+- Your module integrates custom logic / guidelines
+- Your module is not a resource flat pass
+- Your module is used in different layers
+- You use remote modules to avoid repetition between your different projects 
+
+**4. Naming convention**
+- You follow the WYSIWYG pattern
+- You adapt your codebase to your client needs and standards
+- You avoid stuttering
+- You use snake_case convention
 
 ## 🚀 Guidelines
 
