@@ -1,4 +1,4 @@
-# Contexte pattern
+# Context pattern <!-- omit in toc -->
 
 - [Contexte pattern](#contexte-pattern)
   - [Recommended project architecture](#recommended-project-architecture)
