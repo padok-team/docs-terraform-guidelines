@@ -1,19 +1,19 @@
 # Context pattern <!-- omit in toc -->
 
-- [Contexte pattern](#contexte-pattern)
-  - [Recommended project architecture](#recommended-project-architecture)
-  - [Context pattern](#context-pattern)
-  - [Terragrunt context proposal](#terragrunt-context-proposal)
-    - [Input heaven](#input-heaven)
-    - [Context](#context)
-    - [Uniqueness](#uniqueness)
-    - [Ease of refactoring](#ease-of-refactoring)
-      - [Example 1 : Add a one frontend](#example-1--add-a-one-frontend)
-      - [Example 2 : Add a redis to all backends](#example-2--add-a-redis-to-all-backends)
-  - [Files and folder naming](#files-and-folder-naming)
-    - [Folders](#folders)
-    - [Files](#files)
-    - [⚖️ Pros and cons](#️-pros-and-cons)
+- [Recommended project architecture](#recommended-project-architecture)
+- [Context pattern](#context-pattern)
+- [Terragrunt context proposal](#terragrunt-context-proposal)
+  - [Input heaven](#input-heaven)
+  - [Context](#context)
+  - [Uniqueness](#uniqueness)
+  - [Ease of refactoring](#ease-of-refactoring)
+  - [Spliting of layers](#spliting-of-layers)
+    - [Example 1 : Add a one frontend](#example-1--add-a-one-frontend)
+    - [Example 2 : Add a redis to all backends](#example-2--add-a-redis-to-all-backends)
+- [Files and folder naming](#files-and-folder-naming)
+  - [Folders](#folders)
+  - [Files](#files)
+  - [⚖️ Pros and cons](#️-pros-and-cons)
 
 > A design pattern is a general, reusable solution to a commonly occurring problem within a given context in software design
 
@@ -53,7 +53,7 @@
 
 ## Context pattern
 
-You implemented the [WYSIWYG pattern](wysiwg_patterns.md) and have copied module between your layers and are tired of copying them or made some mistakes while doing so.
+You implemented the [WYSIWYG pattern](wysiwg_patterns.md) and have instanciated your module multiple times in your layers and are tired of copying them or/and made some mistakes while doing so.
 
 The context pattern for **WYSIWYG** aims to keep your code DRY (Don't repeat yourself)! 🌞
 
@@ -90,14 +90,13 @@ The context of a layer is all the inputs required for it to be created.
 Your tree structure with inputs through out it, is thus your context.
 
 If your context is DRY, then your tree structure is OK. If you have to repeat an input you might want to refactor your tree structure. Check the [refactoring section](#ease-of-refactoring) for details.
-if you are dry your arbo is OK if not you should change to simplify
 
 ### Uniqueness
 
 Each terragrunt layer defines one and only one module, you can not create a new resource independently without adding it to the module.
 This will force you to ask the question
 
-> should this new resource really be added to this layer ?
+> Should this new resource really be added to this layer ?
 > Isn't this resource a new project need ?
 
 Consequently you can either:
@@ -108,6 +107,17 @@ Consequently you can either:
 ### Ease of refactoring
 
 The bigest advantage of terragrunt is that since every layer is a single module thus a single state. When identifying a new project need you can rearrange you tree structure to match the new view of your project need.
+
+### Spliting of layers
+
+While terragrunt allows you to have a DRY configuration. It also allows you to **easily split layer to match project needs**
+This will enforce you to rethink your splitting every time you add a resource / module to a layer.
+
+In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to add resources for a new frontend. At this point you have 2 choices :
+
+- If you have to add the frontend to every application and futur application then simply add it to the module
+  - Adding a conditional boolean `has_frontend` is a temporary solution and should be use with caution (It may hide a change in project need)
+- If you have to add to a specific app and not any other, or the other will be different. Then you have identified a new buisness need, you should split the layers.
 
 #### Example 1 : Add a one frontend
 
@@ -196,3 +206,7 @@ Pros:
 - DRY 🌞
 - Enforce best practices when creating a new resource
 - Ease of refactoring
+
+Cons:
+
+- Add a tool to your **stack**
