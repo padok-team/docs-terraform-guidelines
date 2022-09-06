@@ -57,7 +57,7 @@ You implemented the [WSIWYG pattern](wysiwg_patterns.md) and have copied module 
 
 The context pattern for **WYSIWYG** aims to keep your code DRY (Don't repeat yourself)! 🌞
 
-Thus all concepts from the **WYSIWYG** pattern applies for this pattern.
+Thus all concepts from the **WYSIWYG** pattern apply to this pattern.
 
 ## Terragrunt context proposal
 
