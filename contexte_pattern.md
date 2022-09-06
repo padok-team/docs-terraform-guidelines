@@ -89,7 +89,7 @@ Example:
 The context of a layer is all the inputs required for it to be created.
 Your tree structure with inputs through out it, is thus your context.
 
-If your context is DRY then your tree structure is OK, if you have to repear an input you might want to refactor your tree structure. Check [refactoring section](#ease-of-refactoring)
+If your context is DRY, then your tree structure is OK. If you have to repeat an input you might want to refactor your tree structure. Check the [refactoring section](#ease-of-refactoring) for details.
 if you are dry your arbo is OK if not you should change to simplify
 
 ### Uniqueness
