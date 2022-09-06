@@ -53,7 +53,7 @@
 
 ## Context pattern
 
-You implemented the [WSIWYG pattern](wysiwg_patterns.md) and have copied module between your layers and are tired of copying them or made some mistakes while doing so.
+You implemented the [WYSIWYG pattern](wysiwg_patterns.md) and have copied module between your layers and are tired of copying them or made some mistakes while doing so.
 
 The context pattern for **WYSIWYG** aims to keep your code DRY (Don't repeat yourself)! 🌞
 
