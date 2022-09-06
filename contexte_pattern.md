@@ -65,7 +65,7 @@ Don't repeat yourself is the motto of terragrunt.
 Terragrunt allows you:
 
 - To write your configuration through out your infrastructure
-- To keep your backend connfig dry
+- To keep your backend config dry
 - Enforce seperation of duty between your layers
 
 ### Input heaven
