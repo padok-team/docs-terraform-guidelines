@@ -66,7 +66,7 @@ Terragrunt allows you:
 
 - To write your configuration through out your infrastructure
 - To keep your backend config dry
-- Enforce seperation of duty between your layers
+- Enforce separation of duty between your layers
 
 ### Input heaven
 
