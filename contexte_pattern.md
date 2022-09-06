@@ -15,7 +15,7 @@
     - [Files](#files)
     - [⚖️ Pros and cons](#️-pros-and-cons)
 
-> Design pattern is a general, reusable solution to a commonly occurring problem within a given context in software design
+> A design pattern is a general, reusable solution to a commonly occurring problem within a given context in software design
 
 ## Recommended project architecture
 
