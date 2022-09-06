@@ -55,7 +55,7 @@
 
 You implemented the [WSIWYG pattern](wysiwg_patterns.md) and have copied module between your layers and are tired of copying them or made some mistakes while doing so.
 
-The contexte pattern for **WYSIWYG** aims to keep your code DRY (Don't repeat yourself)! 🌞
+The context pattern for **WYSIWYG** aims to keep your code DRY (Don't repeat yourself)! 🌞
 
 Thus all concepts from the **WYSIWYG** pattern applies for this pattern.
 
