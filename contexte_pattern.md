@@ -115,7 +115,7 @@ This will enforce you to rethink your splitting every time you add a resource / 
 
 In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to add resources for a new frontend. At this point you have 2 choices :
 
-- If you have to add the frontend to every application and futur application then simply add it to the module
+- If you have to add the frontend to every application and future application then simply add it to the module
   - Adding a conditional boolean `has_frontend` is a temporary solution and should be use with caution (It may hide a change in project need)
 - If you have to add to a specific app and not any other, or the other will be different. Then you have identified a new buisness need, you should split the layers.
 
