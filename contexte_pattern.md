@@ -209,4 +209,4 @@ Pros:
 
 Cons:
 
-- Add a tool to your **stack**
+- Adds a tool to your **stack**
