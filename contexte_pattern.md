@@ -117,7 +117,7 @@ In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to a
 
 - If you have to add the frontend to every application and future application then simply add it to the module
   - Adding a conditional `has_frontend` boolean variable is a temporary solution and should be used with caution, as It may hide a change in your project's needs
-- If you have to add to a specific app and not any other, or the other will be different. Then you have identified a new buisness need, you should split the layers.
+- If you have to add the frontend to a specific app and not any other, or if the other will be different, then you have identified a new business need : you should split the layers.
 
 #### Example 1 : Add a one frontend
 
