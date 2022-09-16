@@ -4,7 +4,7 @@ Guidelines to work with Terraform
 
 ## 🎯 Our purpose
 
-This documentation is provided by the Padok IaC Guild. Its purpose is to present some guidelines and best practices about terraform development. 
+This documentation is provided by the Padok IaC Guild. Its purpose is to present guidelines and best practices about terraform development. 
 
 You do not have to see these guidelines as an absolute truth but more as a proposition to answer frequently asked questions and avoid issues you will often face in your projects.
 
