@@ -1,20 +1,20 @@
 # Context pattern <!-- omit in toc -->
 
 <!-- markdownlint-disable MD051 -->
-- [📐 Recommended project architecture](#📐-recommended-project-architecture)
-- [🗨️ Context pattern](#️🗨️-context-pattern)
-- [🐗 Terragrunt context proposal](#🐗-terragrunt-context-proposal)
-  - [👼 Input heaven](#👼-input-heaven)
-  - [🗨️ Context](#️🗨️-context)
-  - [💎 Uniqueness](#💎-uniqueness)
-  - [⛩️ Ease of refactoring](#️⛩️-ease-of-refactoring)
-  - [🪓 Spliting of layers](#🪓-spliting-of-layers)
-    - [✒️ Example 1 : Add a one frontend](#️✒️-example-1--add-a-one-frontend)
-    - [✒️ Example 2 : Add a redis to all backends](#️✒️-example-2--add-a-redis-to-all-backends)
-- [🗃️ Files and folder naming](#️🗃️-files-and-folder-naming)
-  - [📁 Folders](#📁-folders)
-  - [📄 Files](#📄-files)
-  - [⚖️ Pros and cons](#️⚖️-pros-and-cons)
+- [📐 Recommended project architecture](#-recommended-project-architecture)
+- [🗨️ Context pattern](#️-context-pattern)
+- [🐗 Terragrunt context proposal](#-terragrunt-context-proposal)
+  - [👼 Input heaven](#-input-heaven)
+  - [🗨️ Context](#️-context)
+  - [💎 Uniqueness](#-uniqueness)
+  - [⛩️ Ease of refactoring](#️-ease-of-refactoring)
+  - [🪓 Spliting of layers](#-spliting-of-layers)
+    - [✒️ Example 1 : Add a one frontend](#️-example-1--add-a-one-frontend)
+    - [✒️ Example 2 : Add a redis to all backends](#️-example-2--add-a-redis-to-all-backends)
+- [🗃️ Files and folder naming](#️-files-and-folder-naming)
+  - [📁 Folders](#-folders)
+  - [📄 Files](#-files)
+  - [⚖️ Pros and cons](#️-pros-and-cons)
 
 > A design pattern is a general, reusable solution to a commonly occurring problem within a given context in software design
 
