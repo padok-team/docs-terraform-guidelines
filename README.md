@@ -44,7 +44,7 @@ Our goal is to guide you in this non-exhausting serie of topics:
 - Your module integrates custom logic / guidelines
 - Your module is not a resource flat pass
 - Your module is used in different layers
-- You use remote modules to avoid repetition between your different projects 
+- You use remote modules to avoid repetition between your different projects
 
 ### 4. Naming convention
 
@@ -74,6 +74,8 @@ You'll find bellow standards to follow when working with Terraform and Terragrun
 - [Distant values references](refering_to_resources_from_other_layers.md)
 - [Versioning](terraform_versioning.md)
 - [Naming](terraform_naming.md)
+- [Pre-commits](pre-commits.md)
+- [Iterate on your resources](iterate_on_your_resources.md)
 
 #### Terragrunt
 
