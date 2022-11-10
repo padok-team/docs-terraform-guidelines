@@ -1,10 +1,22 @@
-# Terraform Guidelines
+# IAC Guidelines
 
-Guidelines to work with Terraform
+Guidelines to work with Terraform and Terragrunt
+
+- [IAC Guidelines](#iac-guidelines)
+  - [🎯 Our purpose](#-our-purpose)
+    - [1. Layer/code organisation](#1-layercode-organisation)
+    - [2. Communication between your layers](#2-communication-between-your-layers)
+    - [3. Use of modules](#3-use-of-modules)
+    - [4. Naming convention](#4-naming-convention)
+  - [🚀 Guidelines](#-guidelines)
+    - [🛗 Patterns](#-patterns)
+    - [🎓 Standards](#-standards)
+    - [🚩 Red flags](#-red-flags)
+    - [🛠️ Tooling](#️-tooling)
 
 ## 🎯 Our purpose
 
-This documentation is provided by the Padok IaC Guild. Its purpose is to present guidelines and best practices about terraform development. 
+This documentation is provided by the Padok IaC Guild. Its purpose is to present guidelines and best practices about terraform development.
 
 You do not have to see these guidelines as an absolute truth but more as a proposition to answer frequently asked questions and avoid issues you will often face in your projects.
 
@@ -42,20 +54,32 @@ We recommend everyone to follow the [WYSIWYG pattern](wysiwg_patterns.md) for te
 
 ## 🚀 Guidelines
 
-You'll find bellow standards to follow when working with Terraform.
+You'll find bellow standards to follow when working with Terraform and Terragrunt.
 
-- **Patterns**
-  - [WYSIWYG pattern](wysiwg_patterns.md)
-  - [Context pattern](context_pattern.md)
+### 🛗 Patterns
+
+> Reusable solution to a commonly occurring problem within a given context
+
+- [WYSIWYG pattern](wysiwg_patterns.md)
+- [Context pattern aka the terragrunt implementation](context_pattern.md)
+
+### 🎓 Standards
+
+> Standards help avoiding wast and ensure that we deliver value
+
+- [Distant values references](refering_to_resources_from_other_layers.md)
 - [Versioning](terraform_versioning.md)
 - [Naming](terraform_naming.md)
-- [Pre-commits](pre-commits.md)
-- [Distant values references](refering_to_resources_from_other_layers.md)
 
-## 🚩 Red flags
+### 🚩 Red flags
 
-Red flag is something that you must pay attention about. This is an advice or recommendation not a requirement.
+> Red flag is something that you must pay attention about. This is an advice or recommendation not a requirement.
 
 - [Don'ts](donts.md)
 - [Optional attributes (experimental feature)](optional-attributes.md)
 - [Child modules depth limit](child_modules_depth_limit.md)
+
+### 🛠️ Tooling
+
+
+- [Pre-commits](pre-commits.md)

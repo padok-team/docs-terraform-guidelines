@@ -159,7 +159,6 @@ This type of repo brings flexibity alongside collaboration improvments.
 - We cannot easily use outputs of one layer in another.
 - Some non-selectives CI may run `terraform plan` over all layers.
 
-
 ## Using provider block in modules
 
 When you create a terraform module, you may be tempted to add a `provider` block in your code. Using this pattern, you will have a structure looking like this.

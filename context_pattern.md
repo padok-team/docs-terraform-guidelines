@@ -62,7 +62,7 @@ Thus all concepts from the **WYSIWYG** pattern apply to this pattern.
 
 ## 🐗 Terragrunt context proposal
 
-Don't repeat yourself is the motto of terragrunt.
+Don't repeat yourself is the motto of [terragrunt](https://terragrunt.gruntwork.io/).
 Terragrunt allows you:
 
 - To write your configuration through out your infrastructure

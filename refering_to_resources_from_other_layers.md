@@ -62,7 +62,7 @@ Moreover, your code will adapt if the remote resource update its values.
 
 An other way to refer a resource from another layer is to use [remote state data source](https://www.terraform.io/language/state/remote-state-data).
 
-In that way, you will create a correlation between different terraform states. You retrieve the information from a state reflecting the remote infrastructure at its last apply. 
+In that way, you will create a correlation between different terraform states. You retrieve the information from a state reflecting the remote infrastructure at its last apply.
 
 ```hcl=
 data "terraform_remote_state" "example" {
@@ -82,13 +82,14 @@ resource "azurerm_virtual_network" "example" {
 }
 ```
 
-> This solution is working but it does not create a strong dependancy between layer A and layer B. If you change a parameter in layer A you will have to re-apply both layers. You have to keep tracking your layer dependencies. 
+> This solution is working but it does not create a strong dependancy between layer A and layer B. If you change a parameter in layer A you will have to re-apply both layers. You have to keep tracking your layer dependencies.
 
 ## Using string value (NO!)
 
 The last way yo refer a resource from a different layer is to hard get the string value you want, and pray for it to be valid.
 
 In a small infrastructure it may seem a good idea but it's not since:
+
 1. if you refactor, you will need to change every occurences of hard-coded strings
 2. you will fail at apply and not at plan
 3. if provider API changes your code will fail
@@ -97,8 +98,9 @@ Do not do that.
 
 ## Architecture pattern
 
-When your layer refers to multiple data called for your different modules, you may want to call those data in dedicated files. 
+When your layer refers to multiple data called for your different modules, you may want to call those data in dedicated files.
 In that case, two patterns stand out for your code architecture:
+
 - using a `data.tf` file
 - following the [WYSIWYG pattern](./wysiwg_patterns.md)
 
@@ -141,6 +143,5 @@ In that way, you will know where to search your existing data simply by its purp
 Using data in terraform module is not recomanded because it can create circular dependencies between layers and force you to do target apply.
 
 ![Data Circular dependency](./assets/img/data_circular_dependency.png)
-
 
 Prefer to set variables in your module, then call your data where your module is applied.
