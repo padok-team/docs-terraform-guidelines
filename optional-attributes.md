@@ -7,9 +7,9 @@ make use of the `optional` and `defaults` functions.
 - [Executive summary](#executive-summary)
 - [Why you may want to use this feature](#why-you-may-want-to-use-this-feature)
 - [Why you should not use this feature](#why-you-should-not-use-this-feature)
-  - [Reason 1: it is not stable](#reason-1-it-is-not-stable)
+  - [Reason 1: it can hide mistakes in the caller's code](#reason-1-it-can-hide-mistakes-in-the-callers-code)
   - [Reason 2: it can scare users of your module](#reason-2-it-can-scare-users-of-your-module)
-  - [Reason 3: it can hide mistakes in the caller's code](#reason-3-it-can-hide-mistakes-in-the-callers-code)
+  - [Reason 3: it can stop you from upgrading Terraform](#reason-3-it-can-stop-you-from-upgrading-terraform)
 - [How you could solve your problem differently](#how-you-could-solve-your-problem-differently)
   - [Option 1: delegate the defaulting logic to the caller](#option-1-delegate-the-defaulting-logic-to-the-caller)
   - [Option 2: rework your module's interface](#option-2-rework-your-modules-interface)
@@ -110,22 +110,7 @@ JWT authentication is required unless specified otherwise.
 
 ## Why you should not use this feature
 
-### Reason 1: it is not stable
-
-To cite the official documentation:
-
-> Until the experiment is concluded, the behavior of this feature may see
-> breaking changes even in minor releases. We recommend using this feature only
-> in prerelease versions of modules as long as it remains experimental.
-
-### Reason 2: it can scare users of your module
-
-When applying code that calls your module, Terraform prints a large warning if
-this feature is enabled. This is intimidating for some of Padok's clients, who
-wonder why their brand new codebase already has warnings about potential
-instability.
-
-### Reason 3: it can hide mistakes in the caller's code
+### Reason 1: it can hide mistakes in the caller's code
 
 A user of your module may make a typo, like this (can you spot it?):
 
@@ -158,6 +143,30 @@ feature is enabled, defaults `protocol` to `HTTP`. There is no syntax error in
 the caller's code, nothing for `terraform validate` to catch. The user of your
 module may spend hours figuring out why their FTP server is not working as
 expected.
+
+### Reason 2: it can scare users of your module
+
+When applying code that calls your module with a Terraform version priori to
+1.3.0, Terraform prints a large warning if the feature is enabled. This is
+intimidating for some of Padok's clients, who wonder why their brand new
+codebase already has warnings about potential instability.
+
+Actually, in Terraform versions prior to 1.3.0, the official documentation read:
+
+> Until the experiment is concluded, the behavior of this feature may see
+> breaking changes even in minor releases. We recommend using this feature only
+> in prerelease versions of modules as long as it remains experimental.
+
+Even when using Terraform versions following 1.3.0, **Reason 1** still applies,
+so this feature should still be avoided.
+
+### Reason 3: it can stop you from upgrading Terraform
+
+Modules that enable the experiments = [module_variable_optional_attrs] in
+Terraform settings will not work with Terraform versions greater than 1.3.0.
+Actually, you will get an error when running `terraform init`. Therefore, using
+this feature makes it harder to upgrade from Terraform < 1.3 to Terraform
+>= 1.3, since it requires updating your codebase as well.
 
 ## How you could solve your problem differently
 
