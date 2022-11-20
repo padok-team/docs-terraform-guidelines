@@ -11,6 +11,8 @@ Guidelines to work with Terraform and Terragrunt
   - [🚀 Guidelines](#-guidelines)
     - [🛗 Patterns](#-patterns)
     - [🎓 Standards](#-standards)
+      - [Terraform](#terraform)
+      - [Terragrunt](#terragrunt)
     - [🚩 Red flags](#-red-flags)
     - [🛠️ Tooling](#️-tooling)
 
@@ -37,7 +39,7 @@ Our goal is to guide you in this non-exhausting serie of topics:
 
 ### 3. Use of modules
 
-- Your module's dependencies are provided by the caller 
+- Your module's dependencies are provided by the caller
 - Your module abtracts code complexity
 - Your module integrates custom logic / guidelines
 - Your module is not a resource flat pass
@@ -61,15 +63,22 @@ You'll find bellow standards to follow when working with Terraform and Terragrun
 > Reusable solution to a commonly occurring problem within a given context
 
 - [WYSIWYG pattern](wysiwg_patterns.md)
-- [Context pattern aka the terragrunt implementation](context_pattern.md)
+- [Context pattern aka the terragrunt implementation](terragrunt/context_pattern.md)
 
 ### 🎓 Standards
 
 > Standards help avoiding wast and ensure that we deliver value
 
+#### Terraform
+
 - [Distant values references](refering_to_resources_from_other_layers.md)
 - [Versioning](terraform_versioning.md)
 - [Naming](terraform_naming.md)
+
+#### Terragrunt
+
+- [Terragrunt ADR](terragrunt/adr-terragrunt.md)
+- [Terragrunt guidelines](terragrunt/context_pattern.md)
 
 ### 🚩 Red flags
 
@@ -80,6 +89,5 @@ You'll find bellow standards to follow when working with Terraform and Terragrun
 - [Child modules depth limit](child_modules_depth_limit.md)
 
 ### 🛠️ Tooling
-
 
 - [Pre-commits](pre-commits.md)
