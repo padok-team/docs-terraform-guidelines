@@ -81,6 +81,7 @@ You'll find bellow standards to follow when working with Terraform and Terragrun
 
 - [Terragrunt ADR](terragrunt/adr-terragrunt.md)
 - [Terragrunt guidelines](terragrunt/context_pattern.md)
+- [Distant values references](./terragrunt/refering_to_resources_from_other_layers.md)
 
 ### 🚩 Red flags
 
