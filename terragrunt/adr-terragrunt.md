@@ -50,6 +50,7 @@ The [context pattern](../context_pattern.md) explains ways around the issue and 
 It solves the issue with :
 
 - Distributing inputs from a module between multiple files
+- Can introduce dependencies between layers
 - Ease of refactoring because one layer equals one module
 - Simplifies import statements
 
