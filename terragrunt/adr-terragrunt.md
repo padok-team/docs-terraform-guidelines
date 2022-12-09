@@ -51,6 +51,7 @@ It solves the issue with :
 
 - Distributing inputs from a module between multiple files
 - Ease of refactoring because one layer equals one module
+- Simplifies import statements
 
 ### Terramate
 
