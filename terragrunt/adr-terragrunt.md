@@ -17,7 +17,7 @@
 ## Issue
 
 We have been using Terraform to configure our infrastructures at scale. We started facing issues maintaning and onboarding new comers to a code base.
-The [WYSIWYG pattern](../wysiwg_patterns.md) helped keep common pratices between code bases it has limitation : you need to duplicate code (Modules, resources and data) in order to scale your infrastructure.
+The [WYSIWYG pattern](../wysiwg_patterns.md) helped keep common pratices between code bases, but it also has limitation : you need to duplicate code (Modules, resources and data) in order to scale your infrastructure.
 This increases complexity when creating new infrastructure because you need to understand every parametre of your modules. Thus module complexity tend to increase and refactoring becomes harder.
 
 ## Decision
