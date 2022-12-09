@@ -207,7 +207,7 @@ There are a lot of ways to organise your files and include fonction. Here is a p
   - Generate function of `_settings.tf` file with backend configuration and Terraform provider and version
 - Every leaf layer
   - `input.hcl` that defines all inputs required
-  - `terragrunt.hcl` describing inlcudes with `input.hcl`, the root `terragrunt.hcl` and if needed the parent `module.hcl` 
+  - `terragrunt.hcl` describing includes with `input.hcl`, the root `terragrunt.hcl` and if needed the parent `module.hcl` 
 
 ## ⚖️ Pros and cons
 
