@@ -22,7 +22,7 @@ This increases complexity when creating new infrastructure because you need to u
 
 ## Decision
 
-We have decided to adapt Terragrunt for creating infrastructre at scale.
+We have decided to adopt Terragrunt for creating infrastructre at scale.
 
 ## Status
 
