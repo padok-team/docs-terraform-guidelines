@@ -30,7 +30,7 @@ Decided
 
 ## Assumptions
 
-- We have fully adapoted Terraform and continue to believe that it is the best tool to configure infrastructure.
+- We have fully adopted Terraform and continue to believe that it is the best tool to configure infrastructure.
 - Configuring your cloud infrastructure with code is the best way for SRE to maintain majority of an infrastructure (Other possibility being cloud policies or orchestration tools like ansible)
 
 ## Constraints
