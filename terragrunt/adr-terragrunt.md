@@ -46,7 +46,7 @@ Vanilla [Terraform](https://www.terraform.io/) does not allow you to keep your c
 
 ### Terragrunt
 
-The [contexte pattern](../context_pattern.md) explains ways around the issue and how [Terragrunt](https://terragrunt.gruntwork.io/) help you have a DRY code base.
+The [context pattern](../context_pattern.md) explains ways around the issue and how [Terragrunt](https://terragrunt.gruntwork.io/) help you have a DRY code base.
 It solves the issue with :
 
 - Distributing inputs from a module between multiple files
