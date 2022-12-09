@@ -58,7 +58,7 @@ It solves the issue with :
 
 ### Pulumi
 
-We have looked into [Pulumi](https://www.pulumi.com/) because it uses common language like GO, typescript or Python, but ut does not help solve the issue. Furthemore the solution is still a bit young and still base most of its provider on Terraform provider.
+We have looked into [Pulumi](https://www.pulumi.com/) because it uses common language like GO, typescript or Python, but it does not help solve the issue. Furthemore the solution is still a bit young and still base most of its provider on Terraform provider.
 
 ## Argument
 
