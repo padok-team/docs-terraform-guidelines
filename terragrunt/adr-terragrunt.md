@@ -54,7 +54,7 @@ It solves the issue with :
 
 ### Terramate
 
-[Terramate](https://github.com/mineiros-io/terramate) looks like Terragrunt but is today less adaopted and battled proof than Terragrunt.
+[Terramate](https://github.com/mineiros-io/terramate) looks like Terragrunt but has less adoption inside the community.
 
 ### Pulumi
 
