@@ -14,7 +14,8 @@
 - [🗃️ Files and folder naming](#️-files-and-folder-naming)
   - [📁 Folders](#-folders)
   - [📄 Files](#-files)
-  - [⚖️ Pros and cons](#️-pros-and-cons)
+  - [🏗️ Files organisation](#️-files-organisation)
+- [⚖️ Pros and cons](#️-pros-and-cons)
 
 > A design pattern is a general, reusable solution to a commonly occurring problem within a given context in software design
 
@@ -62,7 +63,7 @@ Thus all concepts from the **WYSIWYG** pattern apply to this pattern.
 
 ## 🐗 Terragrunt context proposal
 
-Don't repeat yourself is the motto of terragrunt.
+Don't repeat yourself is the motto of [terragrunt](https://terragrunt.gruntwork.io/).
 Terragrunt allows you:
 
 - To write your configuration through out your infrastructure
@@ -191,13 +192,24 @@ In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to a
 
 ### 📄 Files
 
-- The file `_settings.hcl` defines required_version of terraform, terraform provider used but not the version and unique identifier for the backend
 - The file `input.hcl` defines all the inputs spcefique to the layer
 - The file `module.hcl` defines the module used by subsequent layers
 - The file `terragrunt.hcl` defines in every layer the terragrunt configuration of include
 - The file `common.hcl` defines default value to every layer
+- Files prefixed with a `_` are created with the generated function
 
-### ⚖️ Pros and cons
+### 🏗️ Files organisation
+
+There are a lot of ways to organise your files and include fonction. Here is a proposition :
+
+- The root `terragrunt.hcl`
+  - Inputs of global parametre (Ex: tenant ID)
+  - Generate function of `_settings.tf` file with backend configuration and Terraform provider and version
+- Every leaf layer
+  - `input.hcl` that defines all inputs required
+  - `terragrunt.hcl` describing includes with `input.hcl`, the root `terragrunt.hcl` and if needed the parent `module.hcl` 
+
+## ⚖️ Pros and cons
 
 Pros:
 
