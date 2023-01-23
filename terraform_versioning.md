@@ -59,16 +59,13 @@ therefore there are none in modules.
 
 ## Bump terraform version
 
-TODO: List steps like
+First of all, you have to review the [Terraform Changelog](https://github.com/hashicorp/terraform/blob/main/CHANGELOG.md) to identify changes that may affect the behavior of your code. As a recent example, the `optional` function was experimental, and passed standard in 1.3. It causes codes to be remanied to remove the declaration of an experimental feature, in the layer and used submodules.
 
-1. Review Changelog
-2. Make modifications
-3. If possible, `terraform plan`
-4. Change terraform version
-5. tfswitch
-6. `terraform plan`
-7. `terraform apply`
-8. ...
+You will have to change the version of your layer during this, that have to be done in your layer only ([modules shouldn't have fixed versions](https://github.com/padok-team/docs-terraform-guidelines/blob/main/terraform_versioning.md#module-layer-versioning)). Change also your Terraform CLI version, you can use tools such as `tfswitch`.
+
+Perform a plan is okay, but don't apply during the phase of adaptation. You don't want to create any drift by upgrading your Terraform version. As the version is stored in the state file, under `terraform_version`, experimenting an upgrade and applying may lead to undesired conflicts of versions due to the state. Note: this field is automaticly updated when applying with a new Terraform version, even if Terraform output just displays that the infrastructure matches the configuration.
+
+Finally, if your Terraform plan doesn't see any differences with the actual code, you can commit your code, then applying when merged on the principal branch. This way is impactless for your coworkers or a CI, because the first who will apply the latest code will perform the migration in the state.
 
 ## Module layer versioning
 
