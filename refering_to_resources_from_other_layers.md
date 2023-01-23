@@ -4,17 +4,19 @@ Some infrastructure projects may be split in different layers or repositories.
 
 There are different ways to use resources from other layers in your project.
 
+This standard applies to `terraform` infrastructure. To go further, feel free to read our [terragrunt standard](./terragrunt/refering_to_resources_from_other_layers.md) about layers.
+
 ## TL;DR
 
 > Prefer using [data source](https://www.terraform.io/language/data-sources) when you have to refer to a resource not present in your current code.
-> You will increase code consistancy and make sure it fails on plan step and not only on apply
-
+> You will increase code consistancy and make sure it fails on plan step and not only on apply.
 
 ## Using resource data source
 
-In terraform, most resources have a [data source](https://www.terraform.io/language/data-sources) object to refer to an existing object in an other layer. 
+In terraform, most resources have a [data source](https://www.terraform.io/language/data-sources) object to refer to an existing object in an other layer.
 
 **Multiple layers infrastructure**
+
 ```bash=
 .
 ├── application
@@ -26,6 +28,7 @@ In terraform, most resources have a [data source](https://www.terraform.io/langu
 ```
 
 **core/main.tf**
+
 ```hcl=
 
 # Create a resource group
@@ -36,9 +39,10 @@ resource "azurerm_resource_group" "example" {
 ```
 
 **application/main.tf**
+
 ```hcl=
 
-# Retrieve a resource group instance 
+# Retrieve a resource group instance
 data "azurerm_resource_group" "example" {
     name     = "example"
     location = "west-europe"
@@ -47,7 +51,7 @@ data "azurerm_resource_group" "example" {
 
 resource "azurerm_app_service" "example" {
     name = "example"
-    
+
     resource_group_name = data.azurerm_resource_group.example.name
     location            = data.azurerm_resource_group.example.location
 
@@ -126,7 +130,7 @@ Moreover, this does not affect the comprehension of your code, as if your data i
 
 ### Following the WYSIWYG pattern
 
-As an antipattern of the solution above, following our wysiwyg convention involves creating files refering the purpose of your data. 
+As an antipattern of the solution above, following our wysiwyg convention involves creating files refering the purpose of your data.
 
 In that way, you will know where to search your existing data simply by its purpose and not by its code origin. The data is considered as a part of your infrastructure code and not as an input.
 
