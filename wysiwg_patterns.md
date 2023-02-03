@@ -70,7 +70,7 @@
 
 > Keep it simple stupid.
 
-**Don't put too much thought on the friendly name of files, the point is that a new comer can easily find code to understand the infrastructure and make modification.**
+**Don’t put too much thought on the friendly name of files, the point is that a new comer can easily find code to understand the infrastructure and make modification.**
 
 ### Layers, folders and projects
 
@@ -85,8 +85,8 @@ A project can host multiple folder to regroup different type of project need.
   - Can be seperate with sub folder to have sub layers, thus a state per sub layer and not layer. (Ex: If you state is too big with too many resource you can divide it in different sub layer)
   - Only one file for the configuration of terraform for the layer named `_settings.tf`
     - Defines required_version of terraform
-    - Terraform provider used but not the version
-    - Unique identifier for the backend
+    - Terraform provider used but not it’s version
+    - Backend configuration
 
 #### Size of layer
 
@@ -149,7 +149,10 @@ This versioning can be done on several layers:
 
 ### Files
 
-- The file `_settings.tf` Defines required_version of terraform, terraform provider used but not the version and unique identifier for the backend
+- The file `_settings.tf` Defines
+  - Required_version of terraform
+  - Backend configuration
+  - Terraform provider used, but not it’s version.
 - Terraform ouput of my layer ou module is named `output.tf` is the interface of my layer with the rest of the world
 - Terraform file that create resources are named with a `reader_friendly_name.tf` after what they define
   - Do not use main.tf if possible
