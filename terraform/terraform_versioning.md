@@ -11,7 +11,7 @@ It does not discuss the terraform module version management.
 
 ### Terraform < 1.0
 
-At the root of a layer (ie, the directory where "terraform apply" is run),
+At the root of a layer (ie, the directory where “terraform apply” is run),
 best practice is to specify an exact version of Terraform to use. This is due
 to terraform state incompatibility between 0.X versions. Use the
 `= 0.2.3` constraint to do this.
@@ -41,7 +41,7 @@ terraform {
 ### Required providers version for layers
 
 If the layer uses providers directly, as opposed to only through modules, then
-you should also specify version contraints for those providers in the layer's
+you should also specify version contraints for those providers in the layer’s
 configuration. 
 
 In order to make the behaviour of layers completely deterministic, the version
@@ -61,17 +61,17 @@ therefore there are none in modules.
 
 First of all, you have to review the [Terraform Changelog](https://github.com/hashicorp/terraform/blob/main/CHANGELOG.md) to identify changes that may affect the behavior of your code. As a recent example, the `optional` function was experimental, and passed standard in 1.3. It causes codes to be remanied to remove the declaration of an experimental feature, in the layer and used submodules.
 
-You will have to change the version of your layer during this, that have to be done in your layer only ([modules shouldn't have fixed versions](https://github.com/padok-team/docs-terraform-guidelines/blob/main/terraform_versioning.md#module-layer-versioning)). Change also your Terraform CLI version, you can use tools such as `tfswitch`.
+You will have to change the version of your layer during this, that have to be done in your layer only ([modules shouldn’t have fixed versions](#module-layer-versioning)). Change also your Terraform CLI version, you can use tools such as `tfswitch`.
 
-Perform a plan is okay, but don't apply during the phase of adaptation. You don't want to create any drift by upgrading your Terraform version. As the version is stored in the state file, under `terraform_version`, experimenting an upgrade and applying may lead to undesired conflicts of versions due to the state. Note: this field is automaticly updated when applying with a new Terraform version, even if Terraform output just displays that the infrastructure matches the configuration.
+Perform a plan is okay, but don’t apply during the phase of adaptation. You don’t want to create any drift by upgrading your Terraform version. As the version is stored in the state file, under `terraform_version`, experimenting an upgrade and applying may lead to undesired conflicts of versions due to the state. Note: this field is automaticly updated when applying with a new Terraform version, even if Terraform output just displays that the infrastructure matches the configuration.
 
-Finally, if your Terraform plan doesn't see any differences with the actual code, you can commit your code, then applying when merged on the principal branch. This way is impactless for your coworkers or a CI, because the first who will apply the latest code will perform the migration in the state.
+Finally, if your Terraform plan doesn’t see any differences with the actual code, you can commit your code, then applying when merged on the principal branch. This way is impactless for your coworkers or a CI, because the first who will apply the latest code will perform the migration in the state.
 
 ## Module layer versioning
 
 ### Terraform CLI version
 
-In a module, you can allow more flexibility with regards to Terraform's
+In a module, you can allow more flexibility with regards to Terraform’s
 minor and/or patch versions. For example, the `~> 1.0` constraint will allow
 all 1.x.x versions of Terraform, while the `~> 1.0.0` constraint will allow
 all 1.0.x versions.
@@ -89,7 +89,7 @@ terraform {
 ### Required providers version for modules
 
 You can indicate that the module requires that certain providers are configured by the caller.
-Again; use the "~> 1.0" constraint to allow all minor and/or patch versions.
+Again; use the ”~> 1.0” constraint to allow all minor and/or patch versions.
 
 > For more information: <https://www.terraform.io/docs/language/providers/requirements.html>
 

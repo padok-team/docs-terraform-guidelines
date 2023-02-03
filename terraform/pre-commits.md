@@ -27,7 +27,7 @@ In order to use pre-commit with all recommanded features, you will need to insta
     pre-commit install
     ```
 
-3. Copy the [`.pre-commit-config.yaml` file](./assets/.pre-commit-config.yaml) at the root of your repository
+3. Copy the [`.pre-commit-config.yaml` file](../assets/.pre-commit-config.yaml) at the root of your repository
 
 ## Usage
 

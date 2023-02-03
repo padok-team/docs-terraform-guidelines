@@ -8,9 +8,9 @@
   - [🗨️ Context](#️-context)
   - [💎 Uniqueness](#-uniqueness)
   - [⛩️ Ease of refactoring](#️-ease-of-refactoring)
-  - [🪓 Spliting of layers](#-spliting-of-layers)
+  - [🪓 Splitting of layers](#-splitting-of-layers)
     - [✒️ Example 1 : Add a one frontend](#️-example-1--add-a-one-frontend)
-    - [✒️ Example 2 : Add a redis to all backends](#️-example-2--add-a-redis-to-all-backends)
+    - [✒️ Example 2 : Add Redis to all backends](#️-example-2--add-redis-to-all-backends)
 - [🗃️ Files and folder naming](#️-files-and-folder-naming)
   - [📁 Folders](#-folders)
   - [📄 Files](#-files)
@@ -55,24 +55,24 @@
 
 ## 🗨️ Context pattern
 
-You implemented the [WYSIWYG pattern](wysiwg_patterns.md) and have instanciated your module multiple times in your layers and are tired of copying them or/and made some mistakes while doing so.
+You implemented the [WYSIWYG pattern](../terraform/wysiwg_patterns.md) and have instantiated your module multiple times in your layers and are tired of copying them or/and made some mistakes while doing so.
 
-The context pattern for **WYSIWYG** aims to keep your code DRY (Don't repeat yourself)! 🌞
+The context pattern for **WYSIWYG** aims to keep your code DRY (Don’t repeat yourself)! 🌞
 
 Thus all concepts from the **WYSIWYG** pattern apply to this pattern.
 
 ## 🐗 Terragrunt context proposal
 
-Don't repeat yourself is the motto of [terragrunt](https://terragrunt.gruntwork.io/).
+Don’t repeat yourself is the motto of [terragrunt](https://terragrunt.gruntwork.io/).
 Terragrunt allows you:
 
-- To write your configuration through out your infrastructure
+- To write your configuration throughout your infrastructure
 - To keep your backend config dry
 - Enforce separation of duty between your layers
 
 ### 👼 Input heaven
 
-Each terragrunt layer defines one and only one module, but input for this module can be defined through out the tree structure.
+Each terragrunt layer defines one and only one module, but input for this module can be defined throughout the tree structure.
 Example:
 
 ```txt
@@ -89,7 +89,7 @@ Example:
 ### 🗨️ Context
 
 The context of a layer is all the inputs required for it to be created.
-Your tree structure with inputs through out it, is thus your context.
+Your tree structure, with inputs throughout it, is thus your context.
 
 If your context is DRY, then your tree structure is OK. If you have to repeat an input you might want to refactor your tree structure. Check the [refactoring section](#ease-of-refactoring) for details.
 
@@ -99,18 +99,18 @@ Each terragrunt layer defines one and only one module, you can not create a new 
 This will force you to ask the question
 
 > Should this new resource really be added to this layer ?
-> Isn't this resource a new project need ?
+> Isn’t this resource a new project need ?
 
-Consequently you can either:
+Consequently, you can either:
 
 - Integrate it with the current layer module because this configuration will be generalized
 - Create a new tree structure because a new project need has been identified
 
 ### ⛩️ Ease of refactoring
 
-The bigest advantage of terragrunt is that since every layer is a single module thus a single state. When identifying a new project need you can rearrange you tree structure to match the new view of your project need.
+The biggest advantage of terragrunt is that since every layer is a single module thus a single state. When identifying a new projectneed,d you can rearrange you tree structure to match the new view of your project need.
 
-### 🪓 Spliting of layers
+### 🪓 Splitting of layers
 
 While terragrunt allows you to have a DRY configuration. It also allows you to **easily split layer to match project needs**
 This will enforce you to rethink your splitting every time you add a resource / module to a layer.
@@ -118,7 +118,7 @@ This will enforce you to rethink your splitting every time you add a resource / 
 In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to add resources for a new frontend. At this point you have 2 choices :
 
 - If you have to add the frontend to every application and future application then simply add it to the module
-  - Adding a conditional `has_frontend` boolean variable is a temporary solution and should be used with caution, as It may hide a change in your project's needs
+  - adding a conditional `has_frontend` boolean variable is a temporary solution and should be used with caution, as It may hide a change in your project’s needs
 - If you have to add the frontend to a specific app and not any other, or if the other will be different, then you have identified a new business need : you should split the layers.
 
 #### ✒️ Example 1 : Add a one frontend
@@ -137,7 +137,7 @@ In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to a
 └── _settings.hcl
 ```
 
-> My application needs a frontend but only for this one app
+> My application needs a frontend, but only for this one app
 
 ```txt
 .
@@ -163,7 +163,7 @@ In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to a
 └── _settings.hcl
 ```
 
-#### ✒️ Example 2 : Add a redis to all backends
+#### ✒️ Example 2 : Add Redis to all backends
 
 ```txt
 .
@@ -179,8 +179,8 @@ In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to a
 └── _settings.hcl
 ```
 
-> I'm going to need a redis for my backend
-> I'll juste update my module backend and test it by overwriting the call to the module within the layer terragrunt.hcl
+> I’m going to need a Redis for my backend
+> I’ll juste update my module backend and test it by overwriting the call to the module within the layer terragrunt.hcl
 
 ## 🗃️ Files and folder naming
 
@@ -200,14 +200,14 @@ In [Example 1](#example-1--add-a-one-frontend) the use case is that we want to a
 
 ### 🏗️ Files organisation
 
-There are a lot of ways to organise your files and include fonction. Here is a proposition :
+There are a lot of ways to organize your files and include function. Here is a proposition :
 
 - The root `terragrunt.hcl`
-  - Inputs of global parametre (Ex: tenant ID)
+  - Inputs of global parameter (Ex: tenant ID)
   - Generate function of `_settings.tf` file with backend configuration and Terraform provider and version
 - Every leaf layer
   - `input.hcl` that defines all inputs required
-  - `terragrunt.hcl` describing includes with `input.hcl`, the root `terragrunt.hcl` and if needed the parent `module.hcl` 
+  - `terragrunt.hcl` describing includes with `input.hcl`, the root `terragrunt.hcl` and if needed the parent `module.hcl`
 
 ## ⚖️ Pros and cons
 
