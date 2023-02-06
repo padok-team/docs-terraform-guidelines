@@ -70,7 +70,7 @@
 
 > Keep it simple stupid.
 
-**Don’t put too much thought on the friendly name of files, the point is that a new comer can easily find code to understand the infrastructure and make modification.**
+**Don’t put too much thought on the friendly name of files, the point is that a newcomer can easily find code to understand the infrastructure and make modification.**
 
 ### Layers, folders and projects
 
@@ -82,7 +82,7 @@ A project can host multiple folder to regroup different type of project need.
 
 - This folder contains layer that answer project needs (Ex: having a production, pre-production and tooling environment)
   - Each file in a layer is named with a friendly name (Ex: production, cluster, database, roles)
-  - Can be seperate with sub folder to have sub layers, thus a state per sub layer and not layer. (Ex: If you state is too big with too many resource you can divide it in different sub layer)
+  - Can be separate with sub folder to have sub layers, thus a state per sub layer and not layer. (Ex: If you state is too big with too many resources you can divide it in different sub layer)
   - Only one file for the configuration of terraform for the layer named `_settings.tf`
     - Defines required_version of terraform
     - Terraform provider used but not it’s version
@@ -106,7 +106,7 @@ Modules are created for two reasons:
 
 - If you need to create a resource multiple times (Ex: network, databases) ✅
 - If you want to hide complexity to create a resource (Ex: EKS cluster) ✅
-- They are **not** created to pass-through another module (Ex for public module) ❌
+- They are **not** created to pass through another module (Ex for public module) ❌
 
 Each file in a module is named with a friendly name (Ex: node_pool, roles, monitoring)
 
@@ -127,7 +127,7 @@ This versioning can be done on several layers:
 - Version the whole repo with the local modules
   - Pro :
     - Simple usage and quick implementation of new feature
-    - Best suited for a one or two man team, synchronous collaboration
+    - Best suited for a one or two-man team, synchronous collaboration
   - Cons
     - Not suited for teams of more than two persons and asynchronous collaboration
     - Need to copy module in a new folder `v2` and change source of module to test a breaking change
@@ -135,11 +135,11 @@ This versioning can be done on several layers:
   - Pro :
     - Best suited for medium and large teams and asynchronous collaboration
     - Fine grain control on versioning
-  - Con : Lead time to add a feature is long (Mulitple pull request to open)
+  - Con : Lead time to add a feature is long (Multiple pull request to open)
 
 ## Files and folder naming
 
-> Keep it simple stupid.
+> Keep it simple, stupid.
 
 ### Folders
 
@@ -153,7 +153,7 @@ This versioning can be done on several layers:
   - Required_version of terraform
   - Backend configuration
   - Terraform provider used, but not it’s version.
-- Terraform ouput of my layer ou module is named `output.tf` is the interface of my layer with the rest of the world
+- Terraform output of my layer or module is named `output.tf` is the interface of my layer with the rest of the world
 - Terraform file that create resources are named with a `reader_friendly_name.tf` after what they define
   - Do not use main.tf if possible
 
@@ -169,13 +169,13 @@ Pros:
 
 Cons
 
-- Your layers are not always ISO between project need, because you can add .tf files to specify a ponctual need within a layer.
-- With terraform you will have a bit of code duplication between layers, because they will each call the same module. These means you will have to write multiple times the same input for every instanciation of the module (Ex: Tenant id)
-  - To solve this issue I invite you to read the [Contexte pattern](contexte_pattern.md)
+- Your layers are not always ISO between project need, because you can add .tf files to specify a punctual need within a layer.
+- With terraform you will have a bit of code duplication between layers, because they will each call the same module. These means you will have to write multiple times the same input for every instantiation of the module (Ex: Tenant id)
+  - To solve this issue I invite you to read the [Context pattern](../terragrunt/context_pattern.md)
 
 ## Examples
 
-### Example 1 : Project with a seperation per environment, module are in local repository with no versioning
+### Example 1 : Project with a separation per environment, module are in local repository with no versioning
 
 Main repository
 
@@ -207,7 +207,7 @@ Main repository
     └── database
 ```
 
-### Example 2 : Project with a seperation per application, module are in remote repository with versioning
+### Example 2 : Project with a separation per application, module are in remote repository with versioning
 
 Main repository
 

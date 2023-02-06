@@ -4,7 +4,7 @@ Some infrastructure projects may be split in different layers or repositories.
 
 There are different ways to use resources from other layers in your project.
 
-This standard applies to `terraform` infrastructure. To go further, feel free to read our [terragrunt standard](./terragrunt/refering_to_resources_from_other_layers.md) about layers.
+This standard applies to `terraform` infrastructure. To go further, feel free to read our [terragrunt standard](../terragrunt/refering_to_resources_from_other_layers.md) about layers.
 
 ## TL;DR
 
@@ -92,11 +92,11 @@ resource "azurerm_virtual_network" "example" {
 
 The last way yo refer a resource from a different layer is to hard get the string value you want, and pray for it to be valid.
 
-In a small infrastructure it may seem a good idea but it's not since:
+In a small infrastructure it may seem a good idea, but it’s not since:
 
-1. if you refactor, you will need to change every occurences of hard-coded strings
-2. you will fail at apply and not at plan
-3. if provider API changes your code will fail
+1. if you refactor, you will need to alter every occurrences of hard-coded strings
+2. you will fail to apply and not at plan
+3. if provider API changes, your code will fail
 
 Do not do that.
 
@@ -146,6 +146,6 @@ In that way, you will know where to search your existing data simply by its purp
 
 Using data in terraform module is not recomanded because it can create circular dependencies between layers and force you to do target apply.
 
-![Data Circular dependency](./assets/img/data_circular_dependency.png)
+![Data Circular dependency](../assets/img/data_circular_dependency.png)
 
 Prefer to set variables in your module, then call your data where your module is applied.
