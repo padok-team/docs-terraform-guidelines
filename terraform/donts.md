@@ -103,8 +103,8 @@ locals {
 }
 
 resource "null" "this" {
-  project = var.project
-  env = var.env
+  project = local.project
+  env = local.env
 }
 ```
 
