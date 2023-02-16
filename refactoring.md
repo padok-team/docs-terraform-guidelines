@@ -1,6 +1,23 @@
 # Refactoring
 
+## Why do you need refactoring ?
+
+Refactoring your codebase terraform is a necessity within the lifecycle of your codebase.
+As your infrastructure grows and as you add collaborators to the project, you'll need to reconsider things like :
+
+- the size of the layers
+- the scope of the modules
+- the interface of the modules
+
+To keep track of your continuous changes, you should set up "quality probes", which will serve as goals the refactored codebase aims to reach like :
+
+- the maximum time a plan can take
+- the number of variables you need to provide before implementing the layer
+- the time it takes to implement your 3 most frequent tasks.
+
 ## Questions to ask yourself
+
+![refacto_decision_tree](assets/img/refacto_decision_tree.png)
 
 - How many collaborators are contributing to the codebase ?
 
