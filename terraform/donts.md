@@ -1,14 +1,16 @@
-# Don'ts / Red Flags
+# Dont's / Red Flags
 
 ## Workspaces
 
-It's the usage of `terraform workspace` commands.
+It's the usage of[`terraform workspace`](https://developer.hashicorp.com/terraform/language/state/workspaces) commands.
 
 ### Drawbacks
 
+- One backend for all environment, so no isolation between environments.
+- One version for all environment, so no immutable infrastructure.
 - You cannot know the number of workspaces (or environments) just by reading the code.
-- Brings confusion in wich workspace the `terraform apply` command is performed, and so, can induce mistaking prod and non-prod environments.
-- Your adding options to your command line.
+- Brings confusion in which workspace the `terraform apply` command is performed, and so, can induce mistaking prod and non-prod environments.
+- You're adding options to your command line.
 
 ### Solutions
 
