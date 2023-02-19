@@ -15,6 +15,7 @@ Guidelines to work with Terraform and Terragrunt
       - [Terragrunt](#terragrunt)
     - [🚩 Red flags](#-red-flags)
     - [🛠️ Tooling](#️-tooling)
+  - [License](#license)
 
 ## 🎯 Our purpose
 
@@ -94,3 +95,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 ### 🛠️ Tooling
 
 - [Pre-commits](terraform/pre-commits.md)
+
+## License
+
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
