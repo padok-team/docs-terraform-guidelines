@@ -29,12 +29,12 @@ To keep track of your continuous changes, you should set up "quality probes", wh
     - Dedicate time on formation for members of the team on the new standards
     - Then start implementing
 
-- Is your codebase grawing ? Is your project in build phase ?
+- Is your codebase growing ? Is your project in build phase ?
 
   - Yes
     - Goal : stop technical debt for new implementations
-      - **Freeze old codebase & start a new codebase** : the new changes will make your refactoring much harder
-    - Force team to implement using the new standards on the new codebase
+      - **Freeze old codebase & start a new codebase** : the new changes will make your refactoring much harder. If you do not, you or other collaborators will be tempted to implement features using this codebase and so it'll increase the number of resources to refactor.
+    - Force team to implement using the [new standards](./) on the new codebase
     - If old resources are needed (like VPCs), use datasources in the new codebase
     - Dedicate time within your sprint to implement the refactoring (don't try to do it in addition of your delivery)
       - If possible 50/50, depending on delivery pressure.
@@ -57,7 +57,7 @@ To keep track of your continuous changes, you should set up "quality probes", wh
 
 ## Don'ts
 
-- Trying to change mutliple parts at once.
+- Trying to change mutliple parts or make multiple steps at once.
   
   It's very tempting to change a parameter on the resource or bump some versions while migrating to modules. But taking small steps and splitting complexity is always a better idea. Proceed at slow pace but keep the plan clear.
 
@@ -80,6 +80,6 @@ To keep track of your continuous changes, you should set up "quality probes", wh
 Drawbacks
     - imports within modules is currently not supported by terraform
 
-## From within
+## From within (editing current repo)
 
 - you could pull the state locally and iterate with `—no-refresh`
