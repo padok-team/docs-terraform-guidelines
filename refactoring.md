@@ -49,6 +49,12 @@ The anti-pattern of this is having **only one terraform state** with every resou
 
 To know how to define the scope of the new layers, you can ask yourself how to dispatch resources **in 3 states** or also in 3 folders. You can rely on the 3-tier way of splitting an architecture. If you realize while refactoring that terraform plans takes too long (more than 1 minute), you may need to split it again.
 
+The gains would be :
+
+- Reduce time spent on terraform plan and apply
+- To decouple resources with different update frequency (for instance : **DNS records** may be updated frequently to add new endpoints whereas **VPC** are created once and never updated)
+- Anticipate the scope definition of your yet to be written modules
+
 ### Do you have modules ? #DRY
 
 ### Are your resources compliant with naming standards ? #CleanCode
