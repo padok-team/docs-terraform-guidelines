@@ -57,7 +57,20 @@ The gains would be :
 
 ### Do you have modules ? #DRY
 
+Modules serve 1 purpose : Don't repeat yourself. You write modules for 2 reasons :
+
+- Wrap multiple resources under 1 logic bloc
+- Hide complexity from layers.
+
+Use as much modules from the Padok's library or Providers repositories as you can. If no module there matches you needs, here is how you should implement modules in your codebase :
+
+- Identify similar resources created between your environments
+- Spot the differences in configuration between them
+- Put resources in the module leaving only the necessary configuration in the interface
+
 ### Are your resources compliant with naming standards ? #CleanCode
+
+Once you have your modules, you should focus on code readability and maintainability. First off, implement naming standards
 
 ### Is your codebase growing ? Is your project in build phase ?
 
