@@ -41,7 +41,7 @@ Your priorities regarding a refactoring are the following in this order :
   - Archive your current codebase
   - Then start implementing on a dedicated codebase
 
-  That way you'll have a clear view on your refactored code.
+  That way you'll have a clear view on your refactored code. Also this pin in time your codebase state, not your infrastructure state. This tag is meant to track modifications not to be used again to apply.
 
 ### Do you have splitted layers ? #Accelerate
 
@@ -68,27 +68,21 @@ Use as much modules from the Padok's library or Providers repositories as you ca
 - Spot the differences in configuration between them
 - Put resources in the module leaving only the necessary configuration in the interface
 
-### Are your resources compliant with naming standards ? #CleanCode
+Pay attention to terraform plan elapsed time as you build your modules.
 
-Once you have your modules, you should focus on code readability and maintainability. First off, implement naming standards
+### Are your resources compliant with naming, versioning and other standards ? #CleanCode
+
+Once you have your modules, you should focus on code readability and maintainability. So, implement [naming standards](./terraform_naming.md), [versioning standards](./terraform_versioning.md) and others.
 
 ### Is your codebase growing ? Is your project in build phase ?
 
-  - Yes
-    - Goal : stop technical debt for new implementations
-      - **Freeze old codebase & start a new codebase** : the new changes will make your refactoring much harder. If you do not, you or other collaborators will be tempted to implement features using this codebase and so it'll increase the number of resources to refactor.
-    - Force team to implement using the [new standards](./) on the new codebase
-    - If old resources are needed (like VPCs), use datasources in the new codebase
-    - Dedicate time within your sprint to implement the refactoring (don't try to do it in addition of your delivery)
-      - If possible 50/50, depending on delivery pressure.
+You should integrate refactoring alongside infrastructure feature delivery. It's more confortable to refactor a cold codebase that stands here for a living infrastructure but most of the time the codebase is 'hot' which means it's used to deploy new infrastructure features.
 
-  - No
-    - Plan the refactoring as an epic (or a macro) of your roadmap/PVLS
-    - You can **refactor the codebase from within** (see bellow)
+Following the plan above, you can build up a consitent backlog. Manage to include refactoring as an epic on it's own. If delivery pressure is intense, keep at least 20% of you velocity on refactoring. Else, if your estimation on the Epic exceed 3 sprints (in agile terms), You should consider allowing it 50% of your velocity.
 
-- How many layers ? Do you implement the 'blueprint' pattern ?
+You'll be able to see the benefits of your refactoring by continuously tracking the maximum time a plan can take.
 
-- Do you need to change resources naming ?
+Refactoring your codebase from within could be easier if you use the [tfautomv](https://tfautomv.dev/) tool as it handles for you the changes in the terraform states for identical unchanged resources.
 
 ## Don'ts
 
@@ -99,26 +93,3 @@ Once you have your modules, you should focus on code readability and maintainabi
 - Split in too many layers
 
   This creates incomprehensible codebase, the information is spread across so many files that you won't have a reliable comprehension of what your infrastructure stack is made of.
-
-## Solutions
-
-### From scratch
-
-#### Why
-
-- Allows to take a step back and design the scopes of layers and modules
-- Minimize the state locks so more co-working
-
-#### How
-
-- Create a new git repo
-- Create new states (they can be on the same bucket)
-- List every resources on the old codebase and diff/compare/count with the new one
-- Keep track of what is maintained on wich codebase
-
-Drawbacks
-    - imports within modules is currently not supported by terraform
-
-## From within (editing current repo)
-
-- you could pull the state locally and iterate with `—no-refresh`
