@@ -34,6 +34,17 @@ Why ?
     name = var.name
     // ...
   }
+  ```
+
+- Name a resource `these` if there is no more descriptive and general name available, or if the resource is part of a module that creates multiple resources of this type. For example, in a `terraform-google-bucket` module :
+
+  ```terraform
+  resource "google_storage_bucket" "these" {
+    for_each = toset(var.names)
+    name = each.value
+    // ...
+  }
+  ```
 
 - Resource and module instance names should be singular if they represent only one instance and should be plural in the case you loop over them with `for_each` or `for`.
 
