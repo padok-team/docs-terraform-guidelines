@@ -1,22 +1,23 @@
 # Handling secrets' values with Terraform
 
-![Use cases for secrets handling](../assets/img/Handling%20secrets%20with%20Terraform.png)
+When it comes to handling secrets' values with Terraform, there are some recommandations that you should follow.
 
 ## TL;DR
 
-WIP
+- Do not store plain text secrets in your codebase and use a Secret Management Tool instead
+- Protect your Terraform state using encryption and least privileges principles
 
-## Pre-requsites
+## Secure access to your Terraform state
 
-### Secure access to your Terraform state
+The very first thing to do is to protect your Terraform state.
 
-Keep in mind that Terarform state is a sensitive file. It contains all the information about your infrastructure. It's a good practice to store it in a secure place. You can use a private backend storage with very limited access to the only people / services that need to access it _(e.g. Terraform Cloud, Terraform Enterprise, S3, GCS, etc.)_.
+Keep in mind that Terarform state is a sensitive file. It contains all the information about your infrastructure, including data sources. It's a good practice to store it in a secure place. You can use a private backend storage with very limited access to the only people / services that need to access it _(e.g. Terraform Cloud, Terraform Enterprise, S3, GCS, etc.)_.
 
 Also, you should use encryption on your backend storage since most of them support it.
 
 If your backend storage does not support encryption, then, maybe you should considerer using a third-party encryption tool like [sops](https://registry.terraform.io/providers/carlpett/sops/latest/docs) or even use a Secret Management Tool _(c.f. bellow for explanations)_.
 
-## Recommended way to handle secrets
+## DO NOT use plain text secrets in your codebase!
 
 ### Use a [`random_password`](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) resource
 
@@ -40,4 +41,6 @@ resource "aws_db_instance" "example" {
 
 ### Use a Secret Management Tool
 
-Also, you can store this sensitive data in a Secret Management Tool _(e.g. AWS Secrets Manager, HashiCorp Vault, etc.)_.
+You can store your secrets' values in a Secret Management Tool _(e.g. AWS Secrets Manager, HashiCorp Vault, etc.)_ and then use a data resource to retrieve them.
+
+As we already mentionned, the data resource's value is treated as sensitive and will not be displayed in the console output BUT will be present in your state file.
