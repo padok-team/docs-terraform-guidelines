@@ -16,7 +16,7 @@ Only the operational team will be creating components in this infrastructure. Ma
 
 How many segmentation do you need to create your resources ? (Sandbox, dev, staging, production or is it global to all environments)
 
-<details><summary>1 environment or multi environment ressources</summary>  
+<details><summary>1 environment or multi-environment resources</summary>  
 
 You could only need one if you're a creating a share network between environment, it's best to code it in the same place. This is very useful if you are building the hub of a hub and spoke.
 It can also be used to manage IAM users or rules.
