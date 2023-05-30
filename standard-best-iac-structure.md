@@ -71,7 +71,7 @@ This code base has been used on:
 
 </details>
 
-<details><summary>2 or + environment</summary>  
+<details><summary>2 or + environments</summary>  
 
 This is the most classic setup, having multiple environment to have segmentation between stages of release.
 
