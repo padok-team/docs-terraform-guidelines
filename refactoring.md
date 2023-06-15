@@ -37,7 +37,7 @@ Your priorities regarding a refactoring are the following in this order :
   What's risky with a team refactoring a codebase is poor quality code merged into the codebase due to a loss in information transmission. To control code quality over time during the refactoring you need to proceed as follows :
 
   - Write out the new standards you want to implement
-  - Dedicate time on formation for members of the team on the new standards
+  - Dedicate time on training for members of the team on the new standards
   - Archive your current codebase
   - Then start implementing on a dedicated codebase
 
@@ -73,16 +73,6 @@ Pay attention to terraform plan elapsed time as you build your modules.
 ### Are your resources compliant with naming, versioning and other standards ? #CleanCode
 
 Once you have your modules, you should focus on code readability and maintainability. So, implement [naming standards](./terraform_naming.md), [versioning standards](./terraform_versioning.md) and others.
-
-### Is your codebase growing ? Is your project in build phase ?
-
-You should integrate refactoring alongside infrastructure feature delivery. It's more confortable to refactor a cold codebase that stands here for a living infrastructure but most of the time the codebase is 'hot' which means it's used to deploy new infrastructure features.
-
-Following the plan above, you can build up a consitent backlog. Manage to include refactoring as an epic on it's own. If delivery pressure is intense, keep at least 20% of you velocity on refactoring. Else, if your estimation on the Epic exceed 3 sprints (in agile terms), You should consider allowing it 50% of your velocity.
-
-You'll be able to see the benefits of your refactoring by continuously tracking the maximum time a plan can take.
-
-Refactoring your codebase from within could be easier if you use the [tfautomv](https://tfautomv.dev/) tool as it handles for you the changes in the terraform states for identical unchanged resources.
 
 ## Don'ts
 
