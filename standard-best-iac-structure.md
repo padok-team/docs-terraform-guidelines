@@ -25,7 +25,7 @@ Great ! First, how many teams will work on this infrastructure ?
 
 #### 1 team (The operational team)
 
-Only the operational team will be creating components in this infrastructure. Make sure that you know how will devs (and possibly data engineer) deploy their code and who creates what they will need to host them.
+Only the operational team will be creating components in this infrastructure. Make sure that you know how devs will (and possibly data engineer) deploy their code and who creates what they will need to host them.
 
 How much segmentation do you need to create your resources ? (Sandbox, dev, staging, production or is it global to all environments)
 
