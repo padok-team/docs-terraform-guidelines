@@ -64,7 +64,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 > Reusable solution to a commonly occurring problem within a given context
 
 - [WYSIWYG pattern](terraform/wysiwg_patterns.md)
-- [Context pattern aka the terragrunt implementation](terragrunt/context_pattern.md)
+- [Context pattern aka the Terragrunt implementation](terragrunt/context_pattern.md)
 
 ### 🎓 Standards
 
@@ -80,7 +80,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 
 #### Terragrunt
 
-- [Terragrunt ADR](terragrunt/adr-terragrunt.md)
+- [Why Terragrunt (ADR)](terragrunt/adr-terragrunt.md)
 - [Terragrunt guidelines](terragrunt/context_pattern.md)
 - [Distant values references](./terragrunt/refering_to_resources_from_other_layers.md)
 
@@ -89,12 +89,13 @@ You’ll find below details of the standards to follow when working with Terrafo
 > Red flag is something that you must pay attention about. This is an advice or recommendation, not a requirement.
 
 - [Dont’s](terraform/donts.md)
-- [Optional attributes (experimental feature)](terraform/optional-attributes.md)
-- [Child modules depth limit](terraform/child_modules_depth_limit.md)
+  - [Optional attributes (experimental feature)](terraform/optional-attributes.md)
+  - [Child modules depth limit](terraform/child_modules_depth_limit.md)
 
 ### 🛠️ Tooling
 
-- [Pre-commits](terraform/pre-commits.md)
+- [Useful tooling for Terragrunt/Terraform](tooling/README.md)
+- [Terraform pre-commits](terraform/pre-commits.md)
 
 ## License
 
