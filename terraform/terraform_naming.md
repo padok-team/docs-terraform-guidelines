@@ -67,7 +67,9 @@ Why ?
 
 ## Variables
 
-- Variable names for **lists** must be plural.
+- Variable names for **collections** (sets, lists and maps) must be plural.
+
+- Variable names for all other types must be singular.
 
 - Variable names for **maps** should reflect the usage of the map. The relationship between the key and values should be obvious based on the name.
 
