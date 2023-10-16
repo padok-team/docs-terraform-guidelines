@@ -1,9 +1,22 @@
 # Optional attributes <!-- omit in toc -->
 
+## Update
+
+This guideline was written while this feature was still an experiment in Terraform. As of [Terraform 1.3.0](https://github.com/hashicorp/terraform/blob/v1.3/CHANGELOG.md#130-september-21-2022), it's generally available and we use it internally without encountering issues.
+
+Therefore, we now recommend the use of this feature while considering the risks that we outlined below. We also created a new section [How you can safely use this feature](#how-you-can-safely-use-this-feature) to help you use it safely.
+
+## Introduction
+
 [Optional attributes][optional-attributes] are an experimental feature that you
 can enable in a Terraform module. When enabled, the module's implementation can
 make use of the `optional` and `defaults` functions.
 
+- [Update](#update)
+- [Introduction](#introduction)
+- [How you can safely use this feature](#how-you-can-safely-use-this-feature)
+  - [Specify the default value](#specify-the-default-value)
+  - [Be aware of typos](#be-aware-of-typos)
 - [Executive summary](#executive-summary)
 - [Why you may want to use this feature](#why-you-may-want-to-use-this-feature)
 - [Why you should not use this feature](#why-you-should-not-use-this-feature)
@@ -13,6 +26,30 @@ make use of the `optional` and `defaults` functions.
 - [How you could solve your problem differently](#how-you-could-solve-your-problem-differently)
   - [Option 1: delegate the defaulting logic to the caller](#option-1-delegate-the-defaulting-logic-to-the-caller)
   - [Option 2: rework your module's interface](#option-2-rework-your-modules-interface)
+
+## How you can safely use this feature
+
+### Specify the default value
+
+It's possible to specify the default value of an optional attribute, like in this example :
+
+```hcl
+variable "with_optional_attribute" {
+  type = object({
+    a = string                # a required attribute
+    b = optional(string)      # an optional attribute
+    c = optional(number, 127) # an optional attribute with a default value
+  })
+}
+```
+
+You should always specify the default value of an optional attribute. This way, you won't need to handle the `null` value for your attribute in your module's implementation, and therefore avoid runtime errors if you forget to handle it.
+
+### Be aware of typos
+
+When using this feature, Terraform will not warn you if you make a typo in the name of an attribute. For example, if you write `procotol` instead of `protocol`, Terraform will not complain and will use the default value for `protocol`.
+
+Below this section is the former content of this guideline. We keep it to explain why we changed our mind about this feature.
 
 ## Executive summary
 
@@ -107,6 +144,7 @@ module "gateway" {
 The `protocol` defaults to `HTTP`, which is most common. SSL is enabled by
 default, with redirection. If SSL is disabled, so is SSL redirection.
 JWT authentication is required unless specified otherwise.
+
 
 ## Why you should not use this feature
 
