@@ -77,6 +77,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 - [Naming](terraform/terraform_naming.md)
 - [Pre-commits](terraform/pre-commits.md)
 - [Iterate on your resources](terraform/iterate_on_your_resources.md)
+- [Optional attributes](terraform/optional-attributes.md)
 
 #### Terragrunt
 
@@ -89,7 +90,6 @@ You’ll find below details of the standards to follow when working with Terrafo
 > Red flag is something that you must pay attention about. This is an advice or recommendation, not a requirement.
 
 - [Dont’s](terraform/donts.md)
-- [Optional attributes (experimental feature)](terraform/optional-attributes.md)
 - [Child modules depth limit](terraform/child_modules_depth_limit.md)
 
 ### 🛠️ Tooling
