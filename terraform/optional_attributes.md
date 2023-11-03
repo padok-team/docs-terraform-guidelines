@@ -8,9 +8,7 @@ Therefore, we now recommend the use of this feature while considering the risks 
 
 ## Introduction
 
-[Optional attributes][optional-attributes] are an experimental feature that you
-can enable in a Terraform module. When enabled, the module's implementation can
-make use of the `optional` and `defaults` functions.
+[Optional attributes](https://developer.hashicorp.com/terraform/language/expressions/type-constraints#optional-object-type-attributes) allow Terraform to insert a default value when an object attribute is undefined.
 
 - [Update](#update)
 - [Introduction](#introduction)
