@@ -35,8 +35,8 @@ It's possible to specify the default value of an optional attribute, like in thi
 variable "with_optional_attribute" {
   type = object({
     a = string                # a required attribute
-    b = optional(string)      # an optional attribute
-    c = optional(number, 127) # an optional attribute with a default value
+    b = optional(string)      # an optional attribute 🔴
+    c = optional(number, 127) # an optional attribute with a default value 🟢
   })
 }
 ```
