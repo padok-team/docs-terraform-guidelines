@@ -18,10 +18,10 @@ to terraform state incompatibility between 0.X versions. Use the
 
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
 
-```yaml
+```hcl
 terraform {
   required_version = "0.14.0"
-  }
+}
 ```
 
 ### Terraform > 1.0 and < 2.0
@@ -80,7 +80,7 @@ all 1.0.x versions.
 
 > For more information: <https://www.terraform.io/docs/language/settings/index.html#specifying-a-required-terraform-version>
 
-```yaml
+```hcl
 terraform {
   required_version = "~> 1.0"
 }
@@ -93,7 +93,7 @@ Again; use the ”~> 1.0” constraint to allow all minor and/or patch versions.
 
 > For more information: <https://www.terraform.io/docs/language/providers/requirements.html>
 
-```yaml
+```hcl
 terraform {
   required_providers {
     google = {
@@ -109,6 +109,42 @@ terraform {
       version = "~> 1.3"
     }
   }
+}
+```
+
+### Remote module version
+
+When using a remote module (eg. from a Terraform registry or from a remote git repository), it should be pinned to a specific version.
+
+This is to ensure that the module's behaviour is deterministic because it won't be upgraded unexpectedly.
+
+For example, with a module from the Terraform registry:
+
+```hcl
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "5.1.2" # <- 🟢
+}
+```
+
+```hcl
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 5.1" # <- 🔴 - may be upgraded unexpectedly
+}
+```
+
+Another example from a remote git repository:
+
+```hcl
+module "vpc" {
+  source = "git::https://github.com/padok-team/terraform-aws-network.git?ref=v0.2.0" # <- 🟢
+}
+```
+
+```hcl
+module "vpc" {
+  source = "git::https://github.com/padok-team/terraform-aws-network.git" # <- 🔴 - may be upgraded unexpectedly
 }
 ```
 

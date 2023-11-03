@@ -231,3 +231,35 @@ If you use a module having such a block in its code, when you will want to move 
 Prefer to declare your `provider` blocks in your layers.
 
 More informations in [providers within modules](https://www.terraform.io/language/modules/develop/providers) documentation.
+
+## Using type `any` in variables
+
+The type `any` is a special type that can be used in variables. The value of a variable with type `any` can be of any type supported by terraform.
+
+```hcl
+variable "my_variable" {
+  type = any
+}
+```
+
+or
+
+```hcl
+variable "my_other_variable" {
+  type = object({
+    special_property = any
+  })
+}
+```
+
+### Advantages
+
+Using type `any` in variables saves time during development because you don't have to be specific about the type of value you want to use.
+
+### Drawbacks
+
+Using type `any` outside of development is a bad practice for two reasons :
+- The users of your module will not know what type of value they should use. They will have to guess it by looking at your code.
+- Your code will be subject to errors at runtime if the consumers of your `any` typed variable try to use it in a way that the user didn't expect.
+
+Using type `any` during development is fine, but you should always replace it with the correct expected type before using your module in production.
