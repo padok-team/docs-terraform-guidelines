@@ -110,7 +110,7 @@ Modules are created for two reasons:
 
 Each file in a module is named with a friendly name (Ex: node_pool, roles, monitoring)
 
-Module can be be located either
+Module can be be located either:
 
 - In the local repository
 - In a remote repository
@@ -119,23 +119,24 @@ Module can be be located either
 
 Versioning of IAC is important to assure the resilience of an infrastructure. It allows you to:
 
-- Rest a breaking change on a module without breaking other `layers` using the same module
+- Test a breaking change on a module without breaking other `layers` using the same module
 - Rollback easily in case of failure
 
 This versioning can be done on several layers:
 
 - Version the whole repo with the local modules
-  - Pro :
+  - Pros:
     - Simple usage and quick implementation of new feature
     - Best suited for a one or two-man team, synchronous collaboration
-  - Cons
+  - Cons:
     - Not suited for teams of more than two persons and asynchronous collaboration
     - Need to copy module in a new folder `v2` and change source of module to test a breaking change
 - The repo and the module are in remote repository
-  - Pro :
+  - Pros:
     - Best suited for medium and large teams and asynchronous collaboration
     - Fine grain control on versioning
-  - Con : Lead time to add a feature is long (Multiple pull request to open)
+  - Cons:
+    - Lead time to add a feature is long (Multiple pull requests to open)
 
 ## Files and folder naming
 
@@ -143,39 +144,39 @@ This versioning can be done on several layers:
 
 ### Folders
 
-- Root folder are named depending on project need (Ex: application, environment)
-- Layer folder are named depending on subproject need (Ex: production, dev, app_1)
-- Module folder are named after what they define
+- Root folders are named depending on project need (Ex: application, environment)
+- Layer folders are named depending on subproject need (Ex: production, dev, app_1)
+- Module folders are named after what they define
 
 ### Files
 
-- The file `_settings.tf` Defines
-  - Required_version of terraform
+- The file `_settings.tf` defines
+  - Required version of terraform
   - Backend configuration
-  - Terraform provider used, but not it’s version.
-- Terraform output of my layer or module is named `output.tf` is the interface of my layer with the rest of the world
-- Terraform file that create resources are named with a `reader_friendly_name.tf` after what they define
-  - Do not use main.tf if possible
+  - Terraform provider used, but not its version.
+- Terraform output of my layer or module is named `output.tf`. It is the interface of my layer with the rest of the world
+- Terraform files that create resources are named with a `reader_friendly_name.tf` after what they define
+  - Do not use `main.tf` if possible
 
 ## ⚖️ Pros and cons
 
 Pros:
 
 - Very easy to create a new layer (project need)
-  - business need
+  - Business need
   - Security need
-- Segmentation of feature with module
+- Segmentation of features with module
 - Ease of exploration : What you see is what you get (WYSIWYG)
 
 Cons
 
 - Your layers are not always ISO between project need, because you can add .tf files to specify a punctual need within a layer.
-- With terraform you will have a bit of code duplication between layers, because they will each call the same module. These means you will have to write multiple times the same input for every instantiation of the module (Ex: Tenant id)
+- With terraform you will have a bit of code duplication between layers, because they will each call the same module. This means you will have to write multiple times the same input for every instantiation of the module (Ex: Tenant id)
   - To solve this issue I invite you to read the [Context pattern](../terragrunt/context_pattern.md)
 
 ## Examples
 
-### Example 1 : Project with a separation per environment, module are in local repository with no versioning
+### Example 1 : Project with a separation per environment, modules are in local repository with no versioning
 
 Main repository
 
@@ -207,7 +208,7 @@ Main repository
     └── database
 ```
 
-### Example 2 : Project with a separation per application, module are in remote repository with versioning
+### Example 2 : Project with a separation per application, modules are in remote repository with versioning
 
 Main repository
 
