@@ -48,9 +48,22 @@ Your priorities regarding a refactoring are the following in this order :
 
 ### Do you have splitted layers ? #Accelerate
 
-The anti-pattern of this is having **only one terraform state** with every resources in it. This slows down the pace of feature promotion.
+The goal is to find the right balance between **macro layers** (too few layers) and **micro layers** (too many layers).
 
-To know how to define the **scope of the new layers**, you can ask yourself how to dispatch resources **in 3 states** or also in 3 folders. You can rely on the 3-tier way of splitting an architecture. If you realize while refactoring that terraform plans takes too long (_more than 1 minute_), you may need to split it again.
+**Macro layers** (too few, ideally avoid having only one terraform state with every resource in it) create problems such as:
+
+- Slow terraform plan and apply operations
+- Difficulty in feature promotion
+- Coupling of resources with different update frequencies
+- Increased blast radius for changes
+
+**Micro layers** (too many) create different problems such as:
+
+- Incomprehensible codebase with information spread across too many files
+- Loss of overview of the overall infrastructure stack
+- Increased complexity in managing dependencies between layers
+
+To know how to define the **scope of balanced layers**, you can ask yourself how to dispatch resources **in 3 states** or also in 3 folders. You can rely on the 3-tier way of splitting an architecture. If you realize while refactoring that terraform plans takes too long (_more than 1 minute_), you may need to split it again.
 
 The gains would be :
 
@@ -83,6 +96,6 @@ Once you have your modules, you should focus on code readability and maintainabi
 
   It's very tempting to change a parameter on the resource or bump some versions while migrating to modules. But taking small steps and splitting complexity is always a better idea. Proceed at slow pace but keep the plan clear.
 
-- Split in too many layers
+- Going to extremes with layer design
 
-  This creates incomprehensible codebase, the information is spread across so many files that you won't have a reliable comprehension of what your infrastructure stack is made of.
+  Avoid both **macro layers** (everything in one state) and **micro layers** (excessive fragmentation). Find the right balance for your specific use case and team size.
