@@ -3,11 +3,21 @@
 The goal of this page is to list some useful tooling for Terragrunt/Terraform.
 
 - [Useful tooling for Terragrunt/Terraform](#useful-tooling-for-terragruntterraform)
+  - [Version Management](#version-management)
   - [Code quality](#code-quality)
   - [Code security](#code-security)
   - [Documentation](#documentation)
   - [Readability of plan and apply](#readability-of-plan-and-apply)
   - [How to operate this tools](#how-to-operate-this-tools)
+
+## Version Management
+
+> Manage different versions of Terraform, Terragrunt, and OpenTofu across projects
+
+- [tenv](https://github.com/tofuutils/tenv) ✨ - Version manager for Terraform, Terragrunt, and OpenTofu
+  - Easily switch between different versions of Terraform/Terragrunt
+  - Example usage : `tenv terraform install 1.6.0 && tenv terraform use 1.6.0`
+  - We recommend this one for managing multiple tool versions across projects
 
 ## Code quality
 
@@ -67,7 +77,7 @@ repos:
       - id: terragrunt_fmt
       - id: terraform_checkov
         args:
-          - --args=--quiet    
+          - --args=--quiet
           - --args=--framework=terraform
       - id: terraform_providers_lock
         args:

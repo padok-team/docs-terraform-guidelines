@@ -1,4 +1,4 @@
-# Refering to resources from other layers
+# Referring to resources from other layers
 
 As terragrunt purpose is to have a better management of your layers dependencies, it includes some features simplifying remote state references.
 

@@ -1,6 +1,6 @@
 # Iterate on your resources
 
-In your Terraform code, you may need to declare a resource or a module mutliple times, and you don't want to repeat yourself. In order to do so, there are multiple ways.
+In your Terraform code, you may need to declare a resource or a module multiple times, and you don't want to repeat yourself. In order to do so, there are multiple ways.
 
 ## TL;DR
 
@@ -50,7 +50,7 @@ azurerm_network_security_rule.examples["rule-1"]
 azurerm_network_security_rule.examples["rule-2"]
 ```
 
-However, it's not recommanded to use a `for_each` by creating a map from a list, because a lists are deterministics and it will enforce the recreation of each instance. Beside, think about changing your list into another type.
+However, it's not recommended to use a `for_each` by creating a map from a list, because lists are deterministic and it will enforce the recreation of each instance. Besides, think about changing your list into another type.
 
 **bad use of `for_each`:**
 

@@ -12,8 +12,8 @@
     - [Files](#files)
   - [⚖️ Pros and cons](#️-pros-and-cons)
   - [Examples](#examples)
-    - [Example 1 : Project with a seperation per environment, module are in local repository with no versioning](#example-1--project-with-a-seperation-per-environment-module-are-in-local-repository-with-no-versioning)
-    - [Example 2 : Project with a seperation per application, module are in remote repository with versioning](#example-2--project-with-a-seperation-per-application-module-are-in-remote-repository-with-versioning)
+    - [Example 1 : Project with a separation per environment, modules are in local repository with no versioning](#example-1--project-with-a-separation-per-environment-modules-are-in-local-repository-with-no-versioning)
+    - [Example 2 : Project with a separation per application, modules are in remote repository with versioning](#example-2--project-with-a-separation-per-application-modules-are-in-remote-repository-with-versioning)
 
 > Design pattern is a general, reusable solution to a commonly occurring problem within a given context in software design
 
@@ -21,35 +21,35 @@
 
 ```txt
 .
-├── environment 
-│   ├── dev  
-│   │   ├── _settings.tf  
-│   │   ├── output.tf 
+├── environment
+│   ├── dev
+│   │   ├── _settings.tf
+│   │   ├── output.tf
 │   │   ├── database.tf # Calls a local database module
 │   │   └── environment.tf # Calls a local environment module
 │   ├── preproduction
-│   │   ├── _settings.tf  
-│   │   ├── output.tf 
+│   │   ├── _settings.tf
+│   │   ├── output.tf
 │   │   └── environment.tf # Calls a local environment module
 │   └── production
-│       ├── _settings.tf  
-│       ├── output.tf 
+│       ├── _settings.tf
+│       ├── output.tf
 │       ├── organisation.tf # Calls aresource directly
 │       └── environment.tf  # Calls a local environment module
-├── application 
-│   ├── app_1  
-|   │   ├── dev  
-|   │   │   ├── _settings.tf  
-|   │   │   ├── output.tf 
-|   │   │   ├── rds.tf 
+├── application
+│   ├── app_1
+|   │   ├── dev
+|   │   │   ├── _settings.tf
+|   │   │   ├── output.tf
+|   │   │   ├── rds.tf
 |   │   │   └── app.tf # Calls a remote app module
-|   │   ├── preproduction  
-|   │   │   ├── _settings.tf  
-|   │   │   ├── output.tf 
+|   │   ├── preproduction
+|   │   │   ├── _settings.tf
+|   │   │   ├── output.tf
 |   │   │   └── app.tf # Calls a remote app module
-|   │   └── production  
-|   │      ├── _settings.tf  
-|   │      ├── output.tf 
+|   │   └── production
+|   │      ├── _settings.tf
+|   │      ├── output.tf
 |   │      └── app.tf # Calls a remote app module
 │   ├── app_2
 │   └── app_3
@@ -60,9 +60,9 @@
     │   ├── bastion.tf
     │   ├── bucket.tf
     │   ├── dns.tf
-    │   ├── ip_ranges.tf 
+    │   ├── ip_ranges.tf
     │   ├── eks.tf
-    │   └── variables.tf 
+    │   └── variables.tf
     └── database
 ```
 
@@ -117,7 +117,7 @@ Module can be be located either:
 
 ### Versioning
 
-Versioning of IAC is important to assure the resilience of an infrastructure. It allows you to:
+Versioning of IaC is important to assure the resilience of an infrastructure. It allows you to:
 
 - Test a breaking change on a module without breaking other `layers` using the same module
 - Rollback easily in case of failure
@@ -182,16 +182,16 @@ Main repository
 
 ```txt
 .
-├── environment 
+├── environment
 │   ├── dev
 │   │     ├── layer-1
-│   │     │   ├── _settings.tf  
-│   │     │   ├── output.tf 
+│   │     │   ├── _settings.tf
+│   │     │   ├── output.tf
 │   │     │   ├── database.tf # Call local database module
 │   │     │   └── environment.tf # Call local environment module
 │   │     └── layer-2
-│   │         ├── _settings.tf  
-│   │         ├── output.tf 
+│   │         ├── _settings.tf
+│   │         ├── output.tf
 │   │         └── kubernetes.tf # Call local kubernetes module
 │   ├── preproduction
 │   └── production
@@ -202,9 +202,9 @@ Main repository
     │   ├── bastion.tf
     │   ├── bucket.tf
     │   ├── dns.tf
-    │   ├── ip_ranges.tf 
+    │   ├── ip_ranges.tf
     │   ├── eks.tf
-    │   └── variables.tf 
+    │   └── variables.tf
     └── database
 ```
 
@@ -214,19 +214,19 @@ Main repository
 
 ```txt
 .
-└── apps 
-    ├── api_1  
+└── apps
+    ├── api_1
     |   ├── dev
-    │   |  ├── _settings.tf  
-    │   |  ├── output.tf 
+    │   |  ├── _settings.tf
+    │   |  ├── output.tf
     │   |  └── app.tf # Call remote module application
     |   ├── preproduction
-    │   |  ├── _settings.tf  
-    │   |  ├── output.tf 
+    │   |  ├── _settings.tf
+    │   |  ├── output.tf
     │   |  └── app.tf # Call remote module application
     |   └── production
-    │      ├── _settings.tf  
-    │      ├── output.tf 
+    │      ├── _settings.tf
+    │      ├── output.tf
     │      ├── datadog.tf # Call community module for Datadog
     │      └── app.tf # Call remote module application
     ├── api_2
@@ -237,10 +237,10 @@ Remote module
 
 ```txt
 .
-└── application 
+└── application
    ├── README.md
    ├── _settings.tf
    ├── bucket.tf
    ├── cloudrun.tf
-   └── variables.tf 
+   └── variables.tf
 ```

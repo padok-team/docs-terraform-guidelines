@@ -1,19 +1,18 @@
 default_stages: [commit]
 repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.71.0
+    rev: v1.99.4 # Check for latest version: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
       - id: terraform_docs
       - id: terraform_fmt
       - id: terraform_tflint
-      - id: terraform_validate
-      # TODO: add usage of security recommendations
-      # - id: checkov
-      # - id: terraform_tfsec
-      # - id: terrascan
+      - id: terragrunt_fmt
+      - id: terragrunt_validate
+      - id: terragrunt_validate_inputs
+      - id: terragrunt_providers_lock
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v5.0.0 # Check for latest version: https://github.com/pre-commit/pre-commit-hooks/releases
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict

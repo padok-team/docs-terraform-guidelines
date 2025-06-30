@@ -1,6 +1,6 @@
 # Handling secrets' values with Terraform
 
-When it comes to handling secrets' values with Terraform, there are some recommandations that you should follow.
+When it comes to handling secrets' values with Terraform, there are some recommendations that you should follow.
 
 ## TL;DR
 
