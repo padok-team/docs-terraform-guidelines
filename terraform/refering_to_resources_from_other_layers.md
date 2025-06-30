@@ -1,4 +1,4 @@
-# Refering to resources from other layers
+# Referring to resources from other layers
 
 Some infrastructure projects may be split in different layers or repositories.
 
@@ -8,12 +8,12 @@ This standard applies to `terraform` infrastructure. To go further, feel free to
 
 ## TL;DR
 
-> Prefer using [data source](https://www.terraform.io/language/data-sources) when you have to refer to a resource not present in your current code.
+> Prefer using [data source](https://developer.hashicorp.com/terraform/language/data-sources) when you have to refer to a resource not present in your current code.
 > You will increase code consistancy and make sure it fails on plan step and not only on apply.
 
 ## Using resource data source
 
-In terraform, most resources have a [data source](https://www.terraform.io/language/data-sources) object to refer to an existing object in an other layer.
+In terraform, most resources have a [data source](https://developer.hashicorp.com/terraform/language/data-sources) object to refer to an existing object in another layer.
 
 **Multiple layers infrastructure**
 
@@ -64,7 +64,7 @@ Moreover, your code will adapt if the remote resource update its values.
 
 ## Using remote state data source
 
-An other way to refer a resource from another layer is to use [remote state data source](https://www.terraform.io/language/state/remote-state-data).
+Another way to refer to a resource from another layer is to use [remote state data source](https://developer.hashicorp.com/terraform/language/state/remote-state-data).
 
 In that way, you will create a correlation between different terraform states. You retrieve the information from a state reflecting the remote infrastructure at its last apply.
 
@@ -130,7 +130,7 @@ Moreover, this does not affect the comprehension of your code, as if your data i
 
 ### Following the WYSIWYG pattern
 
-As an antipattern of the solution above, following our wysiwyg convention involves creating files refering the purpose of your data.
+As an antipattern of the solution above, following our WYSIWYG convention involves creating files referring the purpose of your data.
 
 In that way, you will know where to search your existing data simply by its purpose and not by its code origin. The data is considered as a part of your infrastructure code and not as an input.
 

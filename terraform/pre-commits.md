@@ -4,28 +4,27 @@ You should add pre-commits to your terraform repositories to have a higher minim
 
 ## Dependencies
 
-In order to use pre-commit with all recommanded features, you will need to install some tools
+In order to use pre-commit with all recommended features, you will need to install some tools
 
 - [python](https://www.python.org/downloads/) and [pip](https://pip.pypa.io/en/stable/installation/)
-- [terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+- [terraform](https://developer.hashicorp.com/terraform/install)
 - [tflint](https://github.com/terraform-linters/tflint#installation)
 - [terraform-docs](https://github.com/terraform-docs/terraform-docs#installation)
-<!-- - [tfsec](https://github.com/aquasecurity/tfsec#installation) -->
-<!-- - [checkov](https://github.com/bridgecrewio/checkov#installation) -->
+- [terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/installation/)
 
 ## Installation
 
 1. Install the [`pre-commit`](https://pre-commit.com/) tool
 
-    ```bash
-    pip install pre-commit
-    ```
+   ```bash
+   pip install pre-commit
+   ```
 
 2. Install the git hook scripts
 
-    ```bash
-    pre-commit install
-    ```
+   ```bash
+   pre-commit install
+   ```
 
 3. Copy the [`.pre-commit-config.yaml` file](../assets/.pre-commit-config.yaml) at the root of your repository
 

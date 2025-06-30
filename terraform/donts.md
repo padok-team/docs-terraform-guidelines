@@ -129,7 +129,7 @@ These are projects that look like this (every terraform files at the root of the
 
 - Collaboration is deeply impacted since we have a mono state file.
 - `terraform plan` will take longer and longer each time we add a resource.
-- The [blast radius](https://docs.microsoft.com/en-us/azure/architecture/framework/resiliency/chaos-engineering#blast-radius) is important since all resources are close to each other.
+- The [blast radius](https://learn.microsoft.com/azure/architecture/framework/resiliency/chaos-engineering#blast-radius) is important since all resources are close to each other.
 
 ## Multi-layer repos
 
@@ -177,6 +177,7 @@ When you create a terraform module, you may be tempted to add a `provider` block
 ```
 
 **module/core**
+
 ```hcl
 # _settings.tf
 terraform {
@@ -199,6 +200,7 @@ resource "azurerm_resource_group" "example" {
 ```
 
 **environment**
+
 ```hcl
 # _settings.tf
 terraform {
@@ -225,12 +227,12 @@ Your module will be easier to test as a standalone and you won't need any other 
 
 ### Drawbacks
 
-Terraform manages its code, structure and state very specificly. Each resource will attempt to match its neerest `provider` to instanciate itself and the resource will keep it *reference provider*.
-If you use a module having such a block in its code, when you will want to move or destroy it, terraform will have conflict because it will not find this *reference* anymore and won't be able to reconstruct its state.
+Terraform manages its code, structure and state very specificly. Each resource will attempt to match its neerest `provider` to instanciate itself and the resource will keep it _reference provider_.
+If you use a module having such a block in its code, when you will want to move or destroy it, terraform will have conflict because it will not find this _reference_ anymore and won't be able to reconstruct its state.
 
 Prefer to declare your `provider` blocks in your layers.
 
-More informations in [providers within modules](https://www.terraform.io/language/modules/develop/providers) documentation.
+More information in [providers within modules](https://developer.hashicorp.com/terraform/language/modules/develop/providers) documentation.
 
 ## Using type `any` in variables
 
@@ -259,6 +261,7 @@ Using type `any` in variables saves time during development because you don't ha
 ### Drawbacks
 
 Using type `any` outside of development is a bad practice for two reasons :
+
 - The users of your module will not know what type of value they should use. They will have to guess it by looking at your code.
 - Your code will be subject to errors at runtime if the consumers of your `any` typed variable try to use it in a way that the user didn't expect.
 

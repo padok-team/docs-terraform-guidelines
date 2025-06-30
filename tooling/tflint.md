@@ -31,7 +31,7 @@ plugin "aws" {
 ## How to use it
 
 - In the console : `tflint --recursive -f compact`
-- In terragrunt 
+- In terragrunt
   - Create an after_hook script for the validate command (Example below 👇)
   - Run `terragrunt run-all validate`
 
