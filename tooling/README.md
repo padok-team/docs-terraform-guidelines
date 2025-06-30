@@ -5,6 +5,7 @@ The goal of this page is to list some useful tooling for Terragrunt/Terraform.
 - [Useful tooling for Terragrunt/Terraform](#useful-tooling-for-terragruntterraform)
   - [Version Management](#version-management)
   - [Code quality](#code-quality)
+  - [Refactoring](#refactoring)
   - [Code security](#code-security)
   - [Documentation](#documentation)
   - [Readability of plan and apply](#readability-of-plan-and-apply)
@@ -30,6 +31,14 @@ The goal of this page is to list some useful tooling for Terragrunt/Terraform.
   - Example usage : `terraform fmt -recursive -diff -write=true`
 - [terragrunt hclfmt](https://terragrunt.gruntwork.io/docs/reference/cli-options/#hclfmt) - Rewrites all Terragrunt configuration files to a canonical format
   - Example usage : `terragrunt hclfmt`
+
+## Refactoring
+
+> Automate Terraform refactoring to maintain clean and organized infrastructure code
+
+- [tfautomv](tfautomv.md) ✨ - Automatically generate `moved` blocks and `terraform state mv` commands when refactoring Terraform code
+  - Example usage : `tfautomv`
+  - We recommend this one because it automates the tedious process of creating moved blocks when restructuring Terraform code
 
 ## Code security
 
