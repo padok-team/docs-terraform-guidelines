@@ -73,10 +73,11 @@ Perform a comprehensive audit covering:
 
 ### 5. Code Quality & Security
 
-- **Pre-commit Hooks**: tflint, terraform fmt, checkov integration
-- **Secret Management**: No plain text secrets, proper data source usage
+- **Quality Automation**: Either pre-commit hooks OR CI/CD pipeline for tflint, terraform fmt, checkov (not both required)
+- **Secret Management**: No plain text passwords, keys, or secrets; proper data source usage for sensitive values
 - **Provider Configuration**: No provider blocks in modules
 - **Red Flags**: No workspace usage, no one-liners, proper state management
+- **Note**: Subscription IDs, tenant IDs, and Azure AD group IDs are public identifiers, not sensitive information
 
 ### 6. Cross-Layer References
 
@@ -119,6 +120,8 @@ Perform a comprehensive audit covering:
 - **Level 3**: Security basics implemented, documented processes
 - **Level 2**: Some security measures, ad-hoc implementation
 - **Level 1**: Minimal security considerations
+
+**Note**: Only passwords, keys, certificates, tokens, and other authentication credentials are considered sensitive. Public identifiers like subscription IDs, tenant IDs, and resource IDs are not security risks.
 
 ### Risk-Based Weighting
 
@@ -181,7 +184,7 @@ Provide a comprehensive audit report in this exact format:
 
 - **Current Maturity Level**: [🎯/⚡/🔄/📋/🌱] Level X - [Description]
 - **Automation Coverage**: CI/CD, testing, deployment automation
-- **Tool Integration**: Pre-commit hooks, linting, security scanning
+- **Tool Integration**: Quality automation via pre-commit hooks OR CI/CD pipeline (linting, formatting, security scanning)
 - **Risk Factors**:
   - [🔴/🟠/🟡/🟢] Automation gaps with operational impact OR "None found"
 - **Maturity Gap Analysis**: Automation opportunities
