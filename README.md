@@ -4,6 +4,7 @@ Guidelines to work with Terraform and Terragrunt
 
 - [IaC Guidelines](#iac-guidelines)
   - [🎯 Our purpose](#-our-purpose)
+  - [🤖 GitHub Copilot Integration](#-github-copilot-integration)
   - [Why IaC ?](#why-iac-)
   - [🌟 Standards 🌟](#-standards-)
     - [The 3 gold standards for your infrastructure codebase](#the-3-gold-standards-for-your-infrastructure-codebase)
@@ -25,6 +26,36 @@ Guidelines to work with Terraform and Terragrunt
 This documentation is provided by the Theodo Cloud IaC Guild. Its purpose is to present guidelines and best practices about terraform/terragrunt development.
 
 You do not have to see these guidelines as an absolute truth, but more as a proposition to answer frequently asked questions and avoid issues you will often face in your projects.
+
+## 🤖 GitHub Copilot Integration
+
+To leverage these guidelines in your own IaC projects, we provide comprehensive GitHub Copilot instructions that help generate standards-compliant Terraform and Terragrunt code.
+
+**Copy the [GitHub Copilot instructions](.github/copilot-instructions.md) to your project's `.github/copilot-instructions.md`** to enable Copilot to:
+
+- Generate code following our WYSIWYG and Context patterns
+- Apply proper naming conventions and versioning standards
+- Suggest appropriate module structures and layer designs
+- Avoid common anti-patterns and red flags
+- Reference internal library modules correctly
+
+These instructions encapsulate all the best practices from this documentation into actionable guidance for GitHub Copilot, making it easier to maintain consistency across your infrastructure codebase.
+
+### 🔍 IaC Audit Prompt
+
+For existing codebases, use our [IaC audit prompt](.github/prompts/iac-audit.prompt.md) to evaluate compliance with these standards:
+
+```bash
+/iac-audit
+```
+
+This prompt provides comprehensive analysis including:
+
+- Project structure and pattern compliance assessment
+- Naming conventions and versioning standards evaluation
+- Security and code quality scoring (1-10 scale)
+- Detailed recommendations for improvement
+- Prioritized action items for standards compliance
 
 ## Why IaC ?
 
