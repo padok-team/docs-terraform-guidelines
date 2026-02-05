@@ -62,6 +62,17 @@ Why ?
   }
   ```
 
+- Avoid naming a data source `this` or `these`. Data sources are meant to be used like variables, so their names should be explicit and descriptive.
+
+For example, in a `aws_route53_zone` resource:
+
+  ```
+  data "aws_route53_zone" "theodo_fr" {
+    name         = "theodo.fr."
+    private_zone = true
+  }
+  ```
+
 - Resource and module instance names should be singular if they represent only one instance and should be plural in the case you loop over them with `for_each` or `for`.
 
   ```terraform
