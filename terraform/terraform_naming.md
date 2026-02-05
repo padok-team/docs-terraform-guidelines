@@ -36,12 +36,28 @@ Why ?
   }
   ```
 
+  ```terraform
+  resource "google_storage_bucket" "this" {
+    count = var.enabled ? 1 : 0
+    name = each.value
+    // ...
+  }
+  ```
+
 - Name a resource `these` if there is no more descriptive and general name available, or if the resource is part of a module that creates multiple resources of this type. For example, in a `terraform-google-bucket` module :
 
   ```terraform
   resource "google_storage_bucket" "these" {
     for_each = toset(var.names)
     name = each.value
+    // ...
+  }
+  ```
+
+  ```terraform
+  resource "google_storage_bucket" "these" {
+    count = 3
+    name = "Pwet ${count.index}"
     // ...
   }
   ```
