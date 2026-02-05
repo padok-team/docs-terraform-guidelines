@@ -66,7 +66,7 @@ Why ?
 
 For example, in a `aws_route53_zone` resource:
 
-  ```
+  ```terraform
   data "aws_route53_zone" "theodo_fr" {
     name         = "theodo.fr."
     private_zone = true
