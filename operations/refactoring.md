@@ -90,6 +90,84 @@ Pay attention to terraform plan elapsed time as you build your modules.
 
 Once you have your modules, you should focus on code readability and maintainability. So, implement [naming standards](./terraform_naming.md), [versioning standards](./terraform_versioning.md) and others.
 
+## Refactoring with Terragrunt
+
+If you follow the [Context pattern](../terragrunt/context_pattern.md), refactoring is one of Terragrunt's biggest strengths: since every layer is a single module, it is also a single state. When you identify a new project need, you can rearrange your tree structure to match the new view of your project need.
+
+### Splitting layers
+
+While Terragrunt lets you keep a DRY configuration, it also lets you **easily split layers to match project needs**. This forces you to rethink your splitting every time you add a resource / module to a layer.
+
+In [Example 1](#example-1--add-a-frontend) the use case is that we want to add resources for a new frontend. At this point you have 2 choices:
+
+- If you have to add the frontend to every application and future application then simply add it to the module
+  - adding a conditional `has_frontend` boolean variable is a temporary solution and should be used with caution, as it may hide a change in your project's needs
+- If you have to add the frontend to a specific app and not any other, or if the others will be different, then you have identified a new business need : you should split the layers.
+
+#### Example 1 : Add a frontend
+
+```txt
+.
+├── layers
+│   └── application
+│       ├── module.hcl                 # Calls the backend module
+│       └── app_1
+│           ├── dev
+│           │   ├── inputs.hcl
+│           │   └── terragrunt.hcl
+│           └── production
+│               ├── inputs.hcl
+│               └── terragrunt.hcl
+└── root.hcl
+```
+
+> My application needs a frontend, but only for this one app
+
+```txt
+.
+├── layers
+│   └── application
+│       ├── backend
+│       │   ├── module.hcl
+│       │   └── app_1
+│       │       ├── dev
+│       │       │   ├── inputs.hcl
+│       │       │   └── terragrunt.hcl
+│       │       └── production
+│       │           ├── inputs.hcl
+│       │           └── terragrunt.hcl
+│       └── frontend
+│           ├── module.hcl
+│           └── app_1
+│               ├── dev
+│               │   ├── inputs.hcl
+│               │   └── terragrunt.hcl
+│               └── production
+│                   ├── inputs.hcl
+│                   └── terragrunt.hcl
+└── root.hcl
+```
+
+#### Example 2 : Add Redis to all backends
+
+```txt
+.
+├── layers
+│   └── application
+│       ├── module.hcl                 # Calls the backend module
+│       └── app_1
+│           ├── dev
+│           │   ├── inputs.hcl
+│           │   └── terragrunt.hcl
+│           └── production
+│               ├── inputs.hcl
+│               └── terragrunt.hcl
+└── root.hcl
+```
+
+> I'm going to need a Redis for my backend.
+> I'll just update my backend module and test it by overwriting the call to the module within the layer `terragrunt.hcl`.
+
 ## Don'ts
 
 - Trying to change multiple parts or make multiple steps at once.
