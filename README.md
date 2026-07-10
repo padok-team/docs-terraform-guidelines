@@ -132,7 +132,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 #### Terragrunt
 
 - [Why Terragrunt (ADR)](terragrunt/adr-terragrunt.md)
-- [Terragrunt guidelines](terragrunt/context_pattern.md)
+- [Context Pattern](terragrunt/context_pattern.md)
 - [Distant values references](./terragrunt/refering_to_resources_from_other_layers.md)
 
 ### 🚩 Red flags
