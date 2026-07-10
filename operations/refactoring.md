@@ -121,7 +121,7 @@ In [Example 1](#example-1--add-a-frontend) the use case is that we want to add r
 └── root.hcl
 ```
 
-> My application needs a frontend, but only for this one app
+> Many applications will need the frontend
 
 ```txt
 .
