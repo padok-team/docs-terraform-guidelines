@@ -161,9 +161,9 @@ This type of repo brings flexibity alongside collaboration improvments.
 - We cannot easily use outputs of one layer in another.
 - Some non-selectives CI may run `terraform plan` over all layers.
 
-## Using provider block in modules
+## Setting up a provider in a module
 
-When you create a terraform module, you may be tempted to add a `provider` block in your code. Using this pattern, you will have a structure looking like this.
+When you create a terraform module, you may be tempted to add a `_settings.tf` file with a `provider` block in it. Using this pattern, you will have a structure looking like this.
 
 ```bash
 .
@@ -173,15 +173,13 @@ When you create a terraform module, you may be tempted to add a `provider` block
 └── modules
     └── core
         ├── resource_group.tf
-        └── _settings.tf
+        └── _settings.tf   # 👈 don't
 ```
 
-**module/core**
+**modules/core/_settings.tf**
 
 ```hcl
-# _settings.tf
 terraform {
-
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -190,49 +188,42 @@ terraform {
   }
 }
 
-provider {}
-
-# resource_group.tf
-resource "azurerm_resource_group" "example" {
-  name     = "example"
-  location = "west europe"
-}
+provider "azurerm" {}
 ```
-
-**environment**
-
-```hcl
-# _settings.tf
-terraform {
-
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=2.89"
-    }
-  }
-}
-
-provider {}
-
-# core.tf
-module "core" {
-  source = "../modules/core"
-}
-```
-
-### Advantages
-
-Your module will be easier to test as a standalone and you won't need any other configuration.
 
 ### Drawbacks
 
 Terraform manages its code, structure and state very specificly. Each resource will attempt to match its neerest `provider` to instanciate itself and the resource will keep it _reference provider_.
 If you use a module having such a block in its code, when you will want to move or destroy it, terraform will have conflict because it will not find this _reference_ anymore and won't be able to reconstruct its state.
 
-Prefer to declare your `provider` blocks in your layers.
+On top of that, declaring the provider in each module (or hand-writing a `_settings.tf` per layer) drifts over time: version constraints and provider configuration end up inconsistent across the repository.
 
-More information in [providers within modules](https://developer.hashicorp.com/terraform/language/modules/develop/providers) documentation.
+### Do this instead
+
+Define the provider **once**, centrally, in the Terragrunt `root.hcl` with a `generate` block. Terragrunt renders it into a `_settings.tf` file in every layer, so the whole IaC repository shares the exact same provider and version configuration. Modules never declare a provider — they only use the one injected by the layer.
+
+```hcl
+# root.hcl
+generate "provider" {
+  path      = "_settings.tf" # generated file, prefixed with _
+  if_exists = "overwrite"
+  contents  = <<EOF
+terraform {
+  required_version = "= 1.6.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "= 2.89"
+    }
+  }
+}
+
+provider "azurerm" {}
+EOF
+}
+```
+
+See the [Terragrunt context pattern](../terragrunt/context_pattern.md#roothcl) for the full `root.hcl` structure, and the [providers within modules](https://developer.hashicorp.com/terraform/language/modules/develop/providers) documentation.
 
 ## Using type `any` in variables
 
