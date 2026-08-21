@@ -266,3 +266,47 @@ Using type `any` outside of development is a bad practice for two reasons :
 - Your code will be subject to errors at runtime if the consumers of your `any` typed variable try to use it in a way that the user didn't expect.
 
 Using type `any` during development is fine, but you should always replace it with the correct expected type before using your module in production.
+
+## Data sources depending on values only known at apply time
+
+A `data` source is read by Terraform to fetch information about objects that already exist outside of the current configuration. When all the arguments of a `data` block are known at plan time (static values, variables, locals...), Terraform reads it **during the plan** and its result is available right away.
+
+However, when one of its arguments references a value that is only known **after** apply — typically an attribute of a managed `resource` created in the same configuration — Terraform cannot read the data source during the plan and defers the read to the apply phase.
+
+```hcl
+resource "aws_instance" "this" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t3.micro"
+}
+
+# `instance_id` depends on `aws_instance.this.id`, which is only known after apply
+data "aws_instance" "this" {
+  instance_id = aws_instance.this.id
+}
+```
+
+### Drawbacks
+
+- The data source shows up as a `(known after apply)` read in your plan, adding noise to the output.
+- Your plan no longer reflects the real set of changes: you cannot trust it to review exactly what will happen before applying.
+- Anything that consumes the deferred data source is in turn marked as `(known after apply)`, which cascades and can hide actual changes.
+
+### Solutions
+
+- Reference the managed resource attribute directly instead of reading it back through a data source. If you created the resource, its attributes are already available on the `resource` block.
+
+```hcl
+resource "aws_instance" "this" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t3.micro"
+}
+
+# Use the resource attribute directly, no data source needed
+output "instance_arn" {
+  value = aws_instance.this.arn
+}
+```
+
+- Use `data` blocks only to fetch objects that are **not** managed by the current configuration, in line with the standard [you use data blocks only in layers](../README.md#the-standards-for-layers).
+
+More information in the [data source behavior](https://developer.hashicorp.com/terraform/language/data-sources#data-source-behavior) documentation.
