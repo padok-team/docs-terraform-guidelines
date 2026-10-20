@@ -2,6 +2,12 @@
 
 This workspace follows Theodo Cloud IaC Guild best practices for Terraform and Terragrunt development. These instructions guide GitHub Copilot to generate code that aligns with our standards and recommendations.
 
+Apply these recommendations in the context of the user's request and the target
+project's instructions. Do not restructure an existing project merely to enforce
+a style preference. The maintained
+[Terraform/Terragrunt guides](https://github.com/padok-team/docs-terraform-guidelines)
+take precedence over historical examples in this summary.
+
 ## Core Principles
 
 ### WYSIWYG vs Context Pattern Decision Making
@@ -44,54 +50,7 @@ This workspace follows Theodo Cloud IaC Guild best practices for Terraform and T
 
 ### Context Pattern (Terragrunt)
 
-```
-.
-├── environment
-│   ├── module.hcl
-│   ├── dev
-│   │   ├── inputs.hcl
-│   │   └── terragrunt.hcl
-│   ├── preproduction
-│   │   ├── inputs.hcl
-│   │   └── terragrunt.hcl
-│   └── production
-│       ├── inputs.hcl
-│       └── terragrunt.hcl
-├── application
-│   ├── app_1
-│   │   ├── module.hcl
-│   │   ├── dev
-│   │   │   ├── inputs.hcl
-│   │   │   └── terragrunt.hcl
-│   │   ├── preproduction
-│   │   │   ├── inputs.hcl
-│   │   │   └── terragrunt.hcl
-│   │   └── production
-│   │       ├── inputs.hcl
-│   │       └── terragrunt.hcl
-│   ├── app_2
-│   └── app_3
-├── common.hcl
-└── _settings.hcl
-```
-
-#### Context Pattern Benefits
-
-- **DRY Principle**: Shared configuration eliminates duplication across layers
-- **Environment Consistency**: Same module configuration across environments
-- **Scalable**: Easy to add new environments or components
-- **Input Heaven**: Define inputs throughout the tree structure
-- **Uniqueness**: Each layer defines one and only one module
-- **Ease of Refactoring**: Easy to split layers to match project needs
-
-#### Context Pattern Structure Rules
-
-- `common.hcl`: Store default values for every layer (e.g., tenant ID, database size)
-- `_settings.hcl`: Define Terraform version, providers, and backend configuration for all layers
-- `module.hcl`: Define the module used by subsequent layers
-- `inputs.hcl`: Define layer-specific inputs only
-- `terragrunt.hcl`: Define Terragrunt configuration with includes
-- Each layer defines one and only one module to enforce clear separation
+Follow the [Context Pattern](https://github.com/padok-team/docs-terraform-guidelines/blob/main/terragrunt/context_pattern.md) guide for the layout, the role of each file and the include setup.
 
 #### Bootstrap Layer Exception
 
@@ -104,49 +63,6 @@ The **bootstrap layer** is an intentional exception to the Context Pattern struc
 - **Environment**: Usually shared across environments or replicated per subscription/account
 
 This exception is necessary because you cannot use Terragrunt's remote state configuration until the state storage itself exists.
-
-#### Example Terragrunt Configuration
-
-```hcl
-# environment/module.hcl
-terraform {
-  source = "git@github.com:padok-team/terraform-aws-environment.git?ref=v1.0.0"
-}
-```
-
-```hcl
-# common.hcl
-inputs = {
-  tenant_id       = "12345678-1234-1234-1234-123456789012"
-  database_size   = "db.t3.small"
-  backup_enabled  = true
-}
-```
-
-```hcl
-# environment/dev/inputs.hcl
-inputs = {
-  # Override for dev environment
-  database_size  = "db.t3.micro"
-  backup_enabled = false
-  environment    = "dev"
-}
-```
-
-```hcl
-# environment/dev/terragrunt.hcl
-include "root" {
-  path = find_in_parent_folders()
-}
-
-include "envcommon" {
-  path = "${dirname(find_in_parent_folders())}/environment/module.hcl"
-}
-
-include "inputs" {
-  path = "inputs.hcl"
-}
-```
 
 ### Layer Guidelines
 
@@ -481,7 +397,7 @@ Code reviews must cover both Terraform (.tf) and Terragrunt (.hcl) files to ensu
 
 #### 📋 **Terragrunt-Specific Checks**
 
-- [ ] **Context Pattern**: Proper use of `common.hcl`, `_settings.hcl`, `module.hcl`
+- [ ] **Context Pattern**: Proper use of `root.hcl`, `module.hcl`, `inputs.hcl` and leaf `terragrunt.hcl`
 - [ ] **Input Heaven**: Inputs properly distributed through tree structure
 - [ ] **Include Blocks**: Correct include hierarchy and references
 - [ ] **Uniqueness**: Each layer defines one and only one module
