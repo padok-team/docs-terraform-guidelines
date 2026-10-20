@@ -1,0 +1,36 @@
+# Based on https://www.toptal.com/developers/gitignore/api/terraform
+
+# Local Terraform directories
+.terraform/
+
+# Terraform state and backups may contain secrets
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Variable values may contain secrets
+*.tfvars
+*.tfvars.json
+
+# Local resource overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Saved plans and their JSON exports may contain secrets
+tfplan
+*.tfplan
+*.tfplan.json
+
+# Local CLI configuration may contain credentials
+.terraformrc
+terraform.rc
+
+# Keep .terraform.lock.hcl versioned in layers.
+# Add exceptions below only for reviewed files without secrets, for example:
+# !environments/development.tfvars
+# !example_override.tf

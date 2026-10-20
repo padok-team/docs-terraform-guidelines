@@ -128,6 +128,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 - [Iterate on your resources](terraform/iterate_on_your_resources.md)
 - [Optional attributes](terraform/optional_attributes.md)
 - [Handling secrets](terraform/handling_secrets.md)
+- [Gitignore recommendations](terraform/gitignore.md)
 
 #### Terragrunt
 
