@@ -1,0 +1,7 @@
+{
+  "name": "iac-guidelines",
+  "version": "0.1.0",
+  "description": "Theodo Cloud Terraform and Terragrunt development, review and audit guidelines.",
+  "author": { "name": "Theodo Cloud IaC Guild" },
+  "license": "Apache-2.0"
+}

@@ -4,6 +4,7 @@ Guidelines to work with Terraform and Terragrunt
 
 - [IaC Guidelines](#iac-guidelines)
   - [🎯 Our purpose](#-our-purpose)
+  - [🤖 AI Agent Plugin](#-ai-agent-plugin)
   - [🤖 GitHub Copilot Integration](#-github-copilot-integration)
   - [Why IaC ?](#why-iac-)
   - [🌟 Standards 🌟](#-standards-)
@@ -27,6 +28,25 @@ This documentation is provided by the Theodo Cloud IaC Guild. Its purpose is to 
 
 You do not have to see these guidelines as an absolute truth, but more as a proposition to answer frequently asked questions and avoid issues you will often face in your projects.
 
+## 🤖 AI Agent Plugin
+
+Install the **`iac-guidelines` plugin** from this repository's `theodo-iac`
+marketplace to use these guidelines with **Claude Code, GitHub Copilot CLI and
+Codex CLI**. It provides five skills (guidelines, read-only audit, C4 and
+architecture diagrams, version upgrade) and two agents (`iac-developer`,
+read-only `iac-auditor`; Codex has skills only).
+
+```bash
+claude plugin marketplace add padok-team/docs-terraform-guidelines
+claude plugin install iac-guidelines@theodo-iac
+```
+
+For IDEs that do not load plugins (e.g. Codex IDE), copy the `skills/` folders
+and the guideline folders they reference into your project.
+
+See the [installation and compatibility guide](PLUGIN.md) for marketplace
+commands, local installation, invocation examples and maintenance instructions.
+
 ## 🤖 GitHub Copilot Integration
 
 To leverage these guidelines in your own IaC projects, we provide comprehensive GitHub Copilot instructions that help generate standards-compliant Terraform and Terragrunt code.
@@ -43,7 +63,7 @@ These instructions encapsulate all the best practices from this documentation in
 
 ### 🔍 IaC Audit Prompt
 
-For existing codebases, use our [IaC audit prompt](.github/prompts/iac-audit.prompt.md) to evaluate compliance with these standards:
+For existing codebases, use the `iac-audit` skill of the [plugin](PLUGIN.md) to evaluate compliance with these standards:
 
 ```bash
 /iac-audit
