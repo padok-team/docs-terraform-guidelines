@@ -156,6 +156,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 - [Context Pattern](terragrunt/context_pattern.md)
 - [Distant values references](./terragrunt/refering_to_resources_from_other_layers.md)
 - [Unused inputs](terragrunt/unused_inputs.md)
+- [Local usage](terragrunt/local_usage.md)
 
 ### 🚩 Red flags
 

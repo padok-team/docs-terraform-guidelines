@@ -38,7 +38,7 @@ But, wraping functions in functions brings complexity that will be painfull to u
 
 ### Solutions
 
-A solution can be to same intermediate values of the parsed input, so that we split the complexity.
+A solution can be to same intermediate values of the parsed input, so that we split the complexity (see [Local usage](../terragrunt/local_usage.md) for when a local is justified).
 Another one would be to rely on outputs from subsequent modules or resources.
 
 ## Shell scripts in IaC codebase
