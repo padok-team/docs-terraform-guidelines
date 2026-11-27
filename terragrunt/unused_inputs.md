@@ -20,38 +20,6 @@ Terragrunt exposes the `inputs` as `TF_VAR_*` environment variables. Terraform *
 - **Inherited inputs are hard to track**
   - With the [Context pattern](context_pattern.md), inputs come from `root.hcl`, `module.hcl` and parent `inputs.hcl` files. An obsolete input high in the tree is hard to spot and applies to every layer below it.
 
-### Recommendation
-
-Declare the variable in the module, and set the input with the exact same name.
-
-Ok :+1:
-
-```hcl
-# modules/bastion/variables.tf
-variable "subnet_ids" {
-  type = list(string)
-}
-
-# layers/bastion/dev/inputs.hcl
-inputs = {
-  subnet_ids = ["subnet-0123456789"]
-}
-```
-
-Not recommended ❌
-
-```hcl
-# modules/bastion/variables.tf
-variable "subnet_ids" {
-  type = list(string)
-}
-
-# layers/bastion/dev/inputs.hcl
-inputs = {
-  subnet_id = ["subnet-0123456789"] # typo: there is no variable "subnet_id"
-}
-```
-
 ## How to fix it
 
 - **Typo**: rename the input to match the variable.
