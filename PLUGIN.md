@@ -7,12 +7,12 @@ Packages these guidelines for AI coding tools. The plugin **is this repository**
 | Component | Name | Purpose |
 | --- | --- | --- |
 | Skill | `iac-guidelines` | Core rules + index of the guideline files; used when writing or reviewing `.tf` / `.hcl` |
-| Skill | `iac-audit` | Read-only maturity and risk audit, findings cite `file:line` + guideline file |
+| Skill | `iac-audit` | Read-only maturity and risk audit, runs `guacamole static` when installed; findings cite `file:line` + guideline file (+ Guacamole check ID) |
 | Skill | `iac-c4-diagrams` | C4 Context + Container Mermaid diagrams from a Terragrunt folder |
 | Skill | `iac-architecture-diagram` | Mermaid architecture flowchart (layers, CIDRs, dependencies) + write-up |
 | Skill | `iac-upgrade-versions` | Normalize / upgrade Terraform, Terragrunt and provider constraints, with compatibility checks |
 | Agent | `iac-developer` | Writes / modifies IaC with the guidelines preloaded |
-| Agent | `iac-auditor` | Read-only audit agent |
+| Agent | `iac-auditor` | Audit agent, read-only by instruction; runs `guacamole static` when installed |
 
 ## Compatibility
 
@@ -21,7 +21,7 @@ One source for all tools: `.claude-plugin/` (manifest + marketplace), `skills/` 
 | Tool | Skills | Agents |
 | --- | --- | --- |
 | Claude Code | yes | yes (`agents/`) |
-| GitHub Copilot CLI | yes | yes, same `agents/*.md` (named `iac-guidelines:iac-auditor`; `Read, Grep, Glob` map to `view, grep, glob`) |
+| GitHub Copilot CLI | yes | yes, same `agents/*.md` (named `iac-guidelines:iac-auditor`; `Read, Grep, Glob, Bash` map to `view, grep, glob, bash`) |
 | Codex CLI | yes | **no**: Codex plugins have no agents. Use the `iac-guidelines` skill for coding and `iac-audit` for audits |
 
 IDEs that do not load plugins (e.g. the Codex IDE extension, VS Code Copilot, which reads skills from `.github/skills/` or `.claude/skills/`): copy the `skills/` folders into your project's skill directory, together with the `terraform/`, `terragrunt/`, `operations/` and `tooling/` folders they reference.
