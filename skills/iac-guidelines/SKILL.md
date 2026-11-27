@@ -42,6 +42,7 @@ Apply the rules in the context of the target project. Do not restructure an exis
 | Terragrunt decisions | `terragrunt/adr-terragrunt.md` |
 | Referencing other layers (Terragrunt) | `terragrunt/refering_to_resources_from_other_layers.md` |
 | Terragrunt inputs not declared in the module | `terragrunt/unused_inputs.md` |
+| When to define a `locals` in Terragrunt files | `terragrunt/local_usage.md` |
 | Folder / layer structure | `operations/standard-best-iac-structure.md` |
 | Refactoring and moves | `operations/refactoring.md` |
 | tflint, tfautomv and other tools | `tooling/README.md`, `tooling/tflint.md`, `tooling/tfautomv.md` |

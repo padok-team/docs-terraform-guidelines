@@ -107,6 +107,8 @@ Five rules drive this pattern:
 | `inputs.hcl` | At a layer or any parent | Inputs for that layer overriding or completing the values defined higher up. |
 | `terragrunt.hcl` | The leaf = the layer to apply | The unit you `terragrunt apply`. Wires the includes together. |
 
+In any of these files, only define a `locals` if it is reused or abstracts complexity (see [Local usage](local_usage.md)).
+
 #### `root.hcl`
 
 Defines what **every layer shares**: the remote state backend (with a **unique key
