@@ -27,6 +27,10 @@ The goal of this page is to list some useful tooling for Terragrunt/Terraform.
 - [tflint](tflint.md) ✨ - Linter for Terraform
   - [Default configuration](tflint.md#default-configuration)
   - We recommend this one because it can check a wide range of cloud providers as well as Terraform code
+- [guacamole](https://github.com/padok-team/guacamole) - Opinionated quality checks of Terraform/Terragrunt code against these guidelines
+  - Example usage : `guacamole static -p .`
+  - In CI: [`padok-team/guacamole-action`](https://github.com/padok-team/guacamole-action) (GitHub) or `guacamole ci` (GitLab)
+  - The `iac-audit` skill runs `guacamole static` when it is installed
 - [terraform fmt](https://developer.hashicorp.com/terraform/cli/commands/fmt) - Rewrites all Terraform configuration files to a canonical format
   - Example usage : `terraform fmt -recursive -diff -write=true`
 - [terragrunt hclfmt](https://terragrunt.gruntwork.io/docs/reference/cli-options/#hclfmt) - Rewrites all Terragrunt configuration files to a canonical format
