@@ -95,6 +95,14 @@ For example, in a `aws_route53_zone` resource:
 ## Variables
 
 - Variable names for **collections** (sets, lists and maps) must be plural.
+  A name ending with a word that already denotes a collection is also accepted:
+  `list`, `set`, `map`, `array`, `allowlist`, `whitelist`, `safelist`, `denylist`, `blacklist`, `blocklist`.
+
+  ```terraform
+  variable "allowed_ips"        # <- OK 🟢 plural
+  variable "mongo_ip_allowlist" # <- OK 🟢 collection word
+  variable "allowed_ip"         # <- KO 🔴 singular
+  ```
 
 - Variable names for **maps** should reflect the usage of the map. The relationship between the key and values should be obvious based on the name.
 
