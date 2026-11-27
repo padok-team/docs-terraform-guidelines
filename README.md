@@ -155,6 +155,7 @@ You’ll find below details of the standards to follow when working with Terrafo
 - [Why Terragrunt (ADR)](terragrunt/adr-terragrunt.md)
 - [Context Pattern](terragrunt/context_pattern.md)
 - [Distant values references](./terragrunt/refering_to_resources_from_other_layers.md)
+- [Unused inputs](terragrunt/unused_inputs.md)
 
 ### 🚩 Red flags
 

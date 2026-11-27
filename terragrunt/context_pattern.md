@@ -241,3 +241,5 @@ include "inputs" {
 - The **DRY trade-off** works against pure WYSIWYG: a layer's full set of inputs is
   spread across the tree (`root.hcl`, parent `inputs.hcl`, `module.hcl`), so you
   have to follow the `include` chain to know exactly what a layer applies.
+- Inherited inputs can silently become obsolete when a module changes (see
+  [Unused inputs](unused_inputs.md)).
